@@ -13,5 +13,5 @@ cache:
 
 install:
   - npm install
-  - npm lint
-  - npm test
+  - npm run test-all
+  - npm run build
