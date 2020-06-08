@@ -18,6 +18,8 @@
         "no-console": "off",
         "eol-last": "off",
         "comma-dangle": "off",
-        "import/newline-after-import": "off"
+        "import/newline-after-import": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off"
     }
 }

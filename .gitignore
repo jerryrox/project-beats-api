@@ -2,3 +2,5 @@ node_modules
 build
 .env
 ts-out
+yarn.lock
+yarn-error.log
