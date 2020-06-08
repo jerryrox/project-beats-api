@@ -18,7 +18,8 @@
     "build": "rm -rf ./build && babel -d ./build ./src --extensions '.js,.ts' --ignore **/__test__",
     "start": "MODE_ENV=production node ./build/index.js",
     "server": "nodemon --exec babel-node src/index.ts --extensions \".ts\",\".js\"",
-    "tsc": "tsc && rm -rf ./ts-out"
+    "tsc": "tsc && rm -rf ./ts-out",
+    "heroku-postbuild": "npm install && npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
