@@ -1,0 +1,23 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base"
+    ],
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "plugins": [
+        "import"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "rules": {
+        "quotes": "off",
+        "no-console": "off",
+        "eol-last": "off",
+        "comma-dangle": "off",
+        "import/newline-after-import": "off"
+    }
+}
