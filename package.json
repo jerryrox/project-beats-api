@@ -1,0 +1,8 @@
+{
+  "name": "project-beats-api",
+  "version": "1.0.0",
+  "description": "An API server for using osu! API 2.0",
+  "main": "index.js",
+  "author": "Jerryrox",
+  "license": "MIT"
+}
