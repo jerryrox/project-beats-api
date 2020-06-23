@@ -1,14 +1,14 @@
 import {
-  config
+    config
 } from "dotenv";
 
 config();
 
 const {
-  PORT,
+    PORT,
 } = process.env;
 
 const app = require("./app").default;
 app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}.`);
+    console.log(`Server started on port ${PORT}.`);
 });
