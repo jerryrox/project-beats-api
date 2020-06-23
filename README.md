@@ -11,6 +11,7 @@ An API server for Project: Beats.
 ## Versions
 ### 0.1.0 (In progress)
 #### New features
+- Defined standard API response format.
 #### Improvements
 #### Changes
 #### Fixes

@@ -24,6 +24,7 @@
         "import/extensions": "off",
         "padded-blocks": "off",
         "lines-between-class-members": "off",
-        "indent": ["off", 4]
+        "indent": ["off", 4],
+        "no-multiple-empty-lines": "off"
     }
 }
