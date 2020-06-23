@@ -11,7 +11,8 @@
         "import"
     ],
     "parserOptions": {
-        "ecmaVersion": 6
+        "ecmaVersion": 6,
+        "parser": "babel-eslint"
     },
     "rules": {
         "quotes": "off",
