@@ -9,9 +9,10 @@ import UnsupportedResponse from '../../responses/UnsupportedResponse';
 // import OsuAuthUsers from './OsuAuthUsers';
 import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
 import ErrorResponse from '../../responses/ErrorResponse';
+import SuccessResponse from '../../responses/SuccessResponse';
 
-function getAuthRedirectUrl(): string {
-    return Environment.getAppUrl("/api/osu/auth/response");
+function getAuthRedirectUrl(query?: string): string {
+    return Environment.getAppUrl(`/api/osu/auth/response${query || ""}`);
 }
 
 export function auth(req: express.Request, res: express.Response): void {
@@ -38,41 +39,45 @@ export function auth(req: express.Request, res: express.Response): void {
 }
 
 export async function authResponse(req: express.Request, res: express.Response) {
-    if (req.method === "GET") {
-        const code = req.query.code as string;
-        // const state = req.query.state as string;
-        const clientId = Environment.getClientId(ApiProvider.Osu);
-        const secret = Environment.getSecret(ApiProvider.Osu);
-        try {
-            await axios.post(
-                "https://osu.ppy.sh/oauth/token",
-                JSON.stringify({
-                    client_id: clientId,
-                    client_secret: secret,
-                    code,
-                    grant_type: "authorization_code",
-                    redirect_uri: getAuthRedirectUrl(),
-                }),
-                {
-                    headers: {
-                        Accept: "application/json",
-                        "Content-type": "application/json"
-                    }
-                }
-            );
-        }
-        catch (e) {
-            res.json(new ErrorResponse(e));
-        }
+    const authenticated = req.query.authenticated as string;
+    if (authenticated === "true") {
+        console.log("Authenticated");
+        console.log(req.body);
+        console.log(req.query);
+        res.json(new SuccessResponse());
+        return;
     }
-    else if (req.method === "POST") {
+
+    const code = req.query.code as string;
+    // const state = req.query.state as string;
+    const clientId = Environment.getClientId(ApiProvider.Osu);
+    const secret = Environment.getSecret(ApiProvider.Osu);
+    try {
+        const response = await axios.post(
+            "https://osu.ppy.sh/oauth/token",
+            JSON.stringify({
+                client_id: clientId,
+                client_secret: secret,
+                code,
+                grant_type: "authorization_code",
+                redirect_uri: getAuthRedirectUrl("?authenticated=true"),
+            }),
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-type": "application/json"
+                }
+            }
+        );
+
+        console.log(`Response data: ${JSON.stringify(response.data)}`);
         res.json(new OAuthSuccessResponse({
-            accessToken: req.body.access_token,
-            expiresIn: req.body.expires_in,
-            refreshToken: req.body.refresh_token
+            accessToken: response.data.access_token,
+            expiresIn: response.data.expires_in,
+            refreshToken: response.data.refresh_token
         }));
     }
-    else {
-        throw new Error(`Unsupported request method: ${req.method}`);
+    catch (e) {
+        res.json(new ErrorResponse(e));
     }
 }
