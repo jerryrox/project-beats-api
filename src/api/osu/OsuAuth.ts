@@ -44,7 +44,7 @@ export async function authResponse(req: express.Request, res: express.Response) 
         client_secret: secret,
         code,
         grant_type: "authorization_code",
-        redirect_uri: "",
+        redirect_uri: Environment.getAppUrl(),
     });
 
     res.json(new OAuthSuccessResponse({
