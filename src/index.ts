@@ -1,14 +1,8 @@
-import {
-    config
-} from "dotenv";
+import Environment from "./utils/Environment";
 
-config();
+const port = Environment.getPort();
 
-const {
-    PORT,
-} = process.env;
-
-const app = require("./app").default;
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}.`);
+const app = require("./app").default; // eslint-disable-line
+app.listen(port, () => {
+    console.log(`Server started on port ${port}.`);
 });

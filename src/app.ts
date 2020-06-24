@@ -1,10 +1,11 @@
 import express from "express";
 
-import router from "./routes";
+import ErrorResponse from './responses/ErrorResponse';
+import AuthRoute from './routes/AuthRoute';
 
 const app = express();
 
-app.use("/api", router);
+app.use("/api/:provider/auth", AuthRoute);
 
 app.get("/", (req, res) => {
     res.send(`
@@ -21,6 +22,10 @@ app.get("/", (req, res) => {
             </body>
         </html>
     `);
+});
+
+app.use((err: Error, req: express.Request, res: express.Response): void => {
+    res.status(500).json(new ErrorResponse(err));
 });
 
 export default app;
