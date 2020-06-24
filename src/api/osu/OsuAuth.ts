@@ -33,5 +33,6 @@ export function auth(req: express.Request, res: express.Response): void {
 export function authResponse(req: express.Request, res: express.Response): void {
     console.log("authResponse");
     console.log(req.params);
+    console.log(req.query);
     res.json(new SuccessResponse());
 }
