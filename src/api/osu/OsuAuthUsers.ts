@@ -24,12 +24,12 @@ export class OsuAuthUsersInfo {
     }
 
     /**
-     * Returns the auth user info from specified code.
+     * Returns the auth user info from specified oauthState.
      */
-    getFromCode(code: string): IAuthUser | null {
+    getFromState(oauthState: string): IAuthUser | null {
         this.clean();
         for (let i = 0; i < this.users.length; i++) {
-            if (this.users[i].code === code) {
+            if (this.users[i].oauthState === oauthState) {
                 return this.users[i];
             }
         }

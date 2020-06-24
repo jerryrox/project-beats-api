@@ -15,7 +15,7 @@ describe("OsuAuthUsers", () => {
         expect(info.users.length).toBe(1);
     });
 
-    test("getFromCode", () => {
+    test("getFromState", () => {
         const info = new OsuAuthUsersInfo();
         const user = {
             accessToken: "asdf",
@@ -25,8 +25,8 @@ describe("OsuAuthUsers", () => {
         };
         info.add(user);
 
-        expect(info.getFromCode("code")).toMatchObject(user);
-        expect(info.getFromCode("lol")).toBeNull();
+        expect(info.getFromState("uniqueuuid")).toMatchObject(user);
+        expect(info.getFromState("lol")).toBeNull();
     });
 
     test("Expired user", () => {
@@ -47,7 +47,7 @@ describe("OsuAuthUsers", () => {
         });
         expect(info.users.length).toBe(1);
 
-        expect(info.getFromCode("code")).not.toBeNull();
-        expect(info.getFromCode("code2")).toBeNull();
+        expect(info.getFromState("uniqueuuid")).not.toBeNull();
+        expect(info.getFromState("uniqueuuid2")).toBeNull();
     });
 });
