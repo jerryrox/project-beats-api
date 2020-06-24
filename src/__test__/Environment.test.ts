@@ -34,8 +34,8 @@ describe("EnvironmentInfo", () => {
                 [`${NodeEnv.Test}_URL`.toUpperCase()]: "lol"
             }
         });
-        expect(environment.getAppUrl()).toBe("lol/");
-        expect(environment.getAppUrl("z")).toBe("lol/z");
+        expect(environment.getAppUrl()).toBe("lol");
+        expect(environment.getAppUrl("/z")).toBe("lol/z");
     });
 
     test("Whether the correct secret is returned.", () => {

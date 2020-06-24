@@ -53,7 +53,7 @@ export class EnvironmentInfo {
      */
     getAppUrl(path?: string): string {
         const key = `${this.getBaseKey()}_URL`;
-        return `${this.getEnvValue(key)}/${path || ""}`;
+        return `${this.getEnvValue(key)}${path || ""}`;
     }
 
     /**
