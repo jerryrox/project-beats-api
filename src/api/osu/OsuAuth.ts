@@ -43,6 +43,8 @@ export async function authResponse(req: express.Request, res: express.Response) 
     try {
         console.log(`clientId: ${clientId}`);
         console.log(`secret: ${secret}`);
+        console.log(`code: ${code}`);
+        console.log(`Environment.getAppUrl(): ${Environment.getAppUrl()}`);
 
         const response = await axios.post(
             "https://osu.ppy.sh/oauth/token",
