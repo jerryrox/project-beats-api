@@ -13,7 +13,7 @@ export function auth(req: express.Request, res: express.Response): void {
     // New osu API now requires OAuth for loggin in to their service.
     if (request.oauthCode === undefined) {
         const clientId = Environment.getClientId(ApiProvider.Osu);
-        const redirectUrl = encodeURIComponent(Environment.getAppUrl("/osu/auth/response"));
+        const redirectUrl = encodeURIComponent(Environment.getAppUrl("/api/osu/auth/response"));
         const oauthState = request.oauthState;
         if (oauthState === undefined) {
             throw new Error("OAuth state must be assigned.");
