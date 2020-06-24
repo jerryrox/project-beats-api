@@ -11,8 +11,8 @@ import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
 import ErrorResponse from '../../responses/ErrorResponse';
 import SuccessResponse from '../../responses/SuccessResponse';
 
-function getAuthRedirectUrl(query?: string): string {
-    return Environment.getAppUrl(`/api/osu/auth/response${query || ""}`);
+function getAuthRedirectUrl(): string {
+    return Environment.getAppUrl(`/api/osu/auth/response`);
 }
 
 export function auth(req: express.Request, res: express.Response): void {
@@ -39,8 +39,8 @@ export function auth(req: express.Request, res: express.Response): void {
 }
 
 export async function authResponse(req: express.Request, res: express.Response) {
-    const authenticated = req.query.authenticated as string;
-    if (authenticated === "true") {
+    const code = req.query.code;
+    if (code === undefined) {
         console.log("Authenticated");
         console.log(req.body);
         console.log(req.query);
@@ -48,7 +48,6 @@ export async function authResponse(req: express.Request, res: express.Response) 
         return;
     }
 
-    const code = req.query.code as string;
     // const state = req.query.state as string;
     const clientId = Environment.getClientId(ApiProvider.Osu);
     const secret = Environment.getSecret(ApiProvider.Osu);
@@ -60,7 +59,7 @@ export async function authResponse(req: express.Request, res: express.Response) 
                 client_secret: secret,
                 code,
                 grant_type: "authorization_code",
-                redirect_uri: getAuthRedirectUrl("?authenticated=true"),
+                redirect_uri: getAuthRedirectUrl(),
             }),
             {
                 headers: {
