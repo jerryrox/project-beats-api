@@ -44,13 +44,22 @@ export async function authResponse(req: express.Request, res: express.Response) 
         console.log(`clientId: ${clientId}`);
         console.log(`secret: ${secret}`);
 
-        const response = await axios.post("https://osu.ppy.sh/oauth/token", {
-            client_id: clientId,
-            client_secret: secret,
-            code,
-            grant_type: "authorization_code",
-            redirect_uri: Environment.getAppUrl(),
-        });
+        const response = await axios.post(
+            "https://osu.ppy.sh/oauth/token",
+            JSON.stringify({
+                client_id: clientId,
+                client_secret: secret,
+                code,
+                grant_type: "authorization_code",
+                redirect_uri: Environment.getAppUrl(),
+            }),
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-type": "application/json"
+                }
+            }
+        );
         res.json(new OAuthSuccessResponse({
             accessToken: response.data.access_token,
             expiresIn: response.data.expires_in,
