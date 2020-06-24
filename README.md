@@ -9,10 +9,8 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
-### 0.1.0 (In progress)
+### 0.1.0 (WIP)
 #### New features
+- Defined standard API request format.
 - Defined standard API response format.
-#### Improvements
-#### Changes
-#### Fixes
-#### Others
+- Implemented osu! authentication route.
