@@ -8,6 +8,7 @@ import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
 import UnsupportedResponse from '../../responses/UnsupportedResponse';
 // import OsuAuthUsers from './OsuAuthUsers';
 import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
+import ErrorResponse from '../../responses/ErrorResponse';
 
 export function auth(req: express.Request, res: express.Response): void {
     const request = new AuthRequest(req);
@@ -39,17 +40,24 @@ export async function authResponse(req: express.Request, res: express.Response) 
     const clientId = Environment.getClientId(ApiProvider.Osu);
     const secret = Environment.getSecret(ApiProvider.Osu);
 
-    const response = await axios.post("https://osu.ppy.sh/oauth/token", {
-        client_id: clientId,
-        client_secret: secret,
-        code,
-        grant_type: "authorization_code",
-        redirect_uri: Environment.getAppUrl(),
-    });
+    try {
+        console.log(`clientId: ${clientId}`);
+        console.log(`secret: ${secret}`);
 
-    res.json(new OAuthSuccessResponse({
-        accessToken: response.data.access_token,
-        expiresIn: response.data.expires_in,
-        refreshToken: response.data.refresh_token
-    }));
+        const response = await axios.post("https://osu.ppy.sh/oauth/token", {
+            client_id: clientId,
+            client_secret: secret,
+            code,
+            grant_type: "authorization_code",
+            redirect_uri: Environment.getAppUrl(),
+        });
+        res.json(new OAuthSuccessResponse({
+            accessToken: response.data.access_token,
+            expiresIn: response.data.expires_in,
+            refreshToken: response.data.refresh_token
+        }));
+    }
+    catch (e) {
+        res.json(new ErrorResponse(e));
+    }
 }
