@@ -40,31 +40,31 @@ describe("EnvironmentInfo", () => {
 
     test("Whether the correct secret is returned.", () => {
         const env: any = {};
-        for (let provider in ApiProvider) {
+        Object.values(ApiProvider).forEach(provider => {
             env[`${provider}_${NodeEnv.Test}_SECRET`.toUpperCase()] = provider;
-        }
+        });
         let environment = new EnvironmentInfo({
             envType: NodeEnv.Test,
             env
         });
-        for (let provider in ApiProvider) {
+        Object.values(ApiProvider).forEach(provider => {
             expect(environment.getSecret(provider)).toBe(provider);
-        }
+        });
         expect(() => environment.getSecret("troll")).toThrow();
     });
 
     test("Whether the correct client id is returned.", () => {
         const env: any = {};
-        for (let provider in ApiProvider) {
+        Object.values(ApiProvider).forEach(provider => {
             env[`${provider}_${NodeEnv.Test}_CLIENT_ID`.toUpperCase()] = provider;
-        }
+        });
         let environment = new EnvironmentInfo({
             envType: NodeEnv.Test,
             env
         });
-        for (let provider in ApiProvider) {
+        Object.values(ApiProvider).forEach(provider => {
             expect(environment.getClientId(provider)).toBe(provider);
-        }
+        });
         expect(() => environment.getClientId("troll")).toThrow();
     });
 });
