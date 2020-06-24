@@ -6,7 +6,7 @@ import AuthRequest from '../../requests/AuthRequest';
 import Environment from '../../utils/Environment';
 import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
 import UnsupportedResponse from '../../responses/UnsupportedResponse';
-import OsuAuthUsers from './OsuAuthUsers';
+// import OsuAuthUsers from './OsuAuthUsers';
 import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
 
 export function auth(req: express.Request, res: express.Response): void {
@@ -32,7 +32,7 @@ export function auth(req: express.Request, res: express.Response): void {
     }
 }
 
-export async function authResponse(req: express.Request, res: express.Response): void {
+export async function authResponse(req: express.Request, res: express.Response) {
     const code = req.query.code as string;
     // const state = req.query.state as string;
 
