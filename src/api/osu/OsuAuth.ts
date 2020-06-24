@@ -5,8 +5,6 @@ import { ApiProvider } from '../../utils/Types';
 import AuthRequest from '../../requests/AuthRequest';
 import Environment from '../../utils/Environment';
 import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
-import UnsupportedResponse from '../../responses/UnsupportedResponse';
-// import OsuAuthUsers from './OsuAuthUsers';
 import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
 import ErrorResponse from '../../responses/ErrorResponse';
 import SuccessResponse from '../../responses/SuccessResponse';
@@ -18,32 +16,20 @@ function getAuthRedirectUrl(): string {
 export function auth(req: express.Request, res: express.Response): void {
     const request = new AuthRequest(req);
 
-    // New osu API now requires OAuth for loggin in to their service.
-    if (request.oauthCode === undefined) {
-        const clientId = Environment.getClientId(ApiProvider.Osu);
-        const redirectUrl = encodeURIComponent(getAuthRedirectUrl());
-        const oauthState = request.oauthState;
-        if (oauthState === undefined) {
-            throw new Error("OAuth state must be assigned.");
-        }
-
-        res.json(new RequireOAuthResponse(
-            `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=identify&state=${oauthState}`
-        ));
+    const clientId = Environment.getClientId(ApiProvider.Osu);
+    const redirectUrl = encodeURIComponent(getAuthRedirectUrl());
+    const oauthState = request.oauthState;
+    if (oauthState === undefined) {
+        throw new Error("OAuth state must be assigned.");
     }
-    else {
-        // TODO:
-        // const url = "https://osu.ppy.sh/oauth/token";
-        res.json(new UnsupportedResponse());
-    }
+    res.json(new RequireOAuthResponse(
+        `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=identify&state=${oauthState}`
+    ));
 }
 
 export async function authResponse(req: express.Request, res: express.Response) {
     const code = req.query.code;
     if (code === undefined) {
-        console.log("Authenticated");
-        console.log(req.body);
-        console.log(req.query);
         res.json(new SuccessResponse());
         return;
     }
@@ -69,7 +55,6 @@ export async function authResponse(req: express.Request, res: express.Response) 
             }
         );
 
-        console.log(`Response data: ${JSON.stringify(response.data)}`);
         res.json(new OAuthSuccessResponse({
             accessToken: response.data.access_token,
             expiresIn: response.data.expires_in,
