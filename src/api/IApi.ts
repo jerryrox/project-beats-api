@@ -13,10 +13,11 @@ export function unsupportedRequest(req: express.Request, res: express.Response):
 /**
  * The interface which all API providers must implement.
  */
-export default interface IApi {
+interface IApi {
 
     baseUrl: string;
 
     auth: ExpressRoute;
     authResponse: ExpressRoute;
 }
+export default IApi;

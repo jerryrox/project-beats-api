@@ -35,6 +35,7 @@
         "brace-style": "off",
         "import/no-named-default": "off",
         "prefer-destructuring": "off",
-        "object-shorthand": "off"
+        "object-shorthand": "off",
+        "no-undef": "off"
     }
 }
