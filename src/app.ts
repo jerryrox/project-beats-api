@@ -24,8 +24,10 @@ app.get("/", (req, res) => {
     `);
 });
 
-app.use((err: Error, req: express.Request, res: express.Response): void => {
-    res.status(500).json(new ErrorResponse(err));
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction): void => { // eslint-disable-line
+    if (err) {
+        res.status(500).json(new ErrorResponse(err));
+    }
 });
 
 export default app;
