@@ -12,6 +12,7 @@ An API server for Project: Beats.
 ### 0.2.0 (WIP)
 #### Changes
 - Message for UnsupportedResponse.
+- Removed oauthState variable in AuthRequest.
 
 ### 0.1.0
 #### New features
