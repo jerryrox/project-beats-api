@@ -9,5 +9,8 @@ routes.post("/:provider/auth", (req, res) => {
 routes.get("/:provider/auth/response", (req, res) => {
     ApiGateway.getApi(req.params.provider).authResponse(req, res);
 });
+routes.post("/:provider/auth/response", (req, res) => {
+    ApiGateway.getApi(req.params.provider).authResponse(req, res);
+});
 
 export default routes;
