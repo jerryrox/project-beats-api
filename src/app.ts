@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 
 import ErrorResponse from './responses/ErrorResponse';
 import AuthRoute from './routes/AuthRoute';
@@ -6,6 +7,7 @@ import AuthRoute from './routes/AuthRoute';
 const app = express();
 
 app.use("/api/:provider/auth", AuthRoute);
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
     res.send(`
