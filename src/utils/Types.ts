@@ -21,7 +21,10 @@ export enum ApiProvider {
  */
 export enum ResponseType {
     Success = "Success",
+    OAuthSuccess = "OAuthSuccess",
+
     Unsupported = "Unsupported",
+
     Error = "Error",
 
     RequireLogin = "RequireLogin",
