@@ -1,18 +1,20 @@
 
+type TableRecordType = string | number;
+
 export default class Table {
 
-    private obj: Record<string, any>;
+    private obj: Record<TableRecordType, any>;
 
 
-    constructor(obj: Record<string, any>) {
+    constructor(obj: Record<TableRecordType, any>) {
         this.obj = obj;
     }
 
     /**
      * Returns whether the specified key exists in the table.
      */
-    containsKey(key: string) {
-        return Object.keys(this.obj).indexOf(key) >= 0;
+    containsKey(key: TableRecordType) {
+        return Object.keys(this.obj).indexOf(String(key)) >= 0;
     }
 
     /**
@@ -25,7 +27,7 @@ export default class Table {
     /**
      * Returns the value for specified key.
      */
-    getValue(key: string): any | undefined {
+    getValue(key: TableRecordType): any | undefined {
         return this.obj[key];
     }
 
