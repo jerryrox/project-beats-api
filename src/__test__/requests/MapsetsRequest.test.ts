@@ -2,35 +2,11 @@ import MapsetsRequest from '../../requests/MapsetsRequest';
 import { MapsetGenreType, MapsetLanguageType, MapsetSortType } from '../../utils/Types';
 
 describe("MapsetsRequest", () => {
-    test("findCursorValue", () => {
-        const request = new MapsetsRequest({});
-        expect(request.findCursorValue()).toBeUndefined();
-        expect(request.findCursorValue(null)).toBeUndefined();
-        expect(request.findCursorValue(3)).toBeUndefined();
-        expect(request.findCursorValue({
-            "aa": "val"
-        })).toBeUndefined();
-        expect(request.findCursorValue({
-            "aacursor[a]": "val"
-        })).toBeUndefined();
-        expect(request.findCursorValue({
-            "cursor[a]aa": "val"
-        })).toBeUndefined();
-        expect(request.findCursorValue({
-            "cursor[]": "val"
-        })).toBeUndefined();
-        expect(request.findCursorValue({
-            "cursor[_id]": "val"
-        })).toBeUndefined();
-        expect(request.findCursorValue({
-            "cursor[aa]": "val"
-        })).toBe("val");
-    });
-
     test("Request state", () => {
         const request = new MapsetsRequest({
             query: {
                 cursorId: "cid",
+                cursorKey: "asdf",
                 "cursor[asdf]": "cv",
                 mode: "m",
                 category: "c",
@@ -43,6 +19,7 @@ describe("MapsetsRequest", () => {
             }
         });
         expect(request.cursorId).toBe("cid");
+        expect(request.cursorKey).toBe("asdf");
         expect(request.cursorValue).toBe("cv");
         expect(request.mode).toBe(0);
         expect(request.category).toBe(0);

@@ -7,6 +7,7 @@ import { GameModeType, MapsetCategoryType, MapsetGenreType, MapsetLanguageType, 
 export default class MapsetsRequest extends ApiRequest {
 
     cursorId: string | undefined;
+    cursorKey: string | undefined;
     cursorValue: string | undefined;
     mode: number | undefined;
     category: number | undefined;
@@ -23,7 +24,8 @@ export default class MapsetsRequest extends ApiRequest {
         super(req);
 
         this.cursorId = req.query?.cursorId;
-        this.cursorValue = this.findCursorValue(req.query);
+        this.cursorKey = req.query?.cursorKey;
+        this.cursorValue = req.query ? req.query[`cursor[${this.cursorKey}]`] : undefined;
         this.mode = StringUtils.tryParseNumber(req.query?.mode, GameModeType.OsuStandard);
         this.category = StringUtils.tryParseNumber(req.query?.category, MapsetCategoryType.Any);
         this.genre = StringUtils.tryParseNumber(req.query?.genre, MapsetGenreType.Any);
@@ -33,21 +35,5 @@ export default class MapsetsRequest extends ApiRequest {
         this.hasVideo = req.query?.hasVideo === "true" || req.query?.hasVideo === true;
         this.hasStoryboard = req.query?.hasStoryboard === "true";
         this.isDescending = req.query?.isDescending !== "false";
-    }
-
-    /**
-     * Finds cursor value from specified query and returns it.
-     */
-    findCursorValue(query?: any) {
-        if (query === undefined || query === null || typeof (query) !== "object") {
-            return undefined;
-        }
-        const keys = Object.keys(query);
-        for (let i = 0; i < keys.length; i++) {
-            if ((/^cursor\[(?!_id)[a-zA-Z0-9-_.]+\]$/).test(keys[i])) {
-                return query[keys[i]];
-            }
-        }
-        return undefined;
     }
 }
