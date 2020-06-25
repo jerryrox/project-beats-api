@@ -16,7 +16,7 @@ export function auth(req: express.Request, res: express.Response): void {
     const clientId = Environment.getClientId(ApiProvider.Osu);
     const redirectUrl = encodeURIComponent(getAuthRedirectUrl());
     res.json(new RequireOAuthResponse(
-        `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=identify&state=`
+        `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=public&state=`
     ));
 }
 
