@@ -1,8 +1,9 @@
 import express from 'express';
+
 /**
  * Types of supported Node runtime mode.
  */
-export enum NodeEnv {
+export enum NodeEnvType {
     Development = "development",
     Production = "production",
     Test= "test"
@@ -11,7 +12,7 @@ export enum NodeEnv {
 /**
  * Types of API providers currently supported by Project: Beats.
  */
-export enum ApiProvider {
+export enum ApiProviderType {
     Osu = "osu",
     Bloodcat = "bloodcat"
 }
@@ -52,6 +53,65 @@ export enum GameModeType {
     OsuMania = GameProviderType.Osu + 3,
 
     BeatsStandard = GameProviderType.Beats
+}
+
+/**
+ * Types of mapset categories.
+ */
+export enum MapsetCategoryType {
+    Any,
+    Ranked,
+    Qualified,
+    Loved,
+    Pending,
+    Graveyard
+}
+
+/**
+ * Types of mapset genres.
+ */
+export enum MapsetGenreType {
+    Any,
+    Unspecified,
+    VideoGame,
+    Anime,
+    Rock,
+    Pop,
+    Other,
+    Novelty,
+    HipHop,
+    Electronic
+}
+
+/**
+ * Types of sorting key for mapset searching.
+ */
+export enum MapsetSortType {
+    Title,
+    Artist,
+    Difficulty,
+    Ranked,
+    Rating,
+    Plays,
+    Favorites,
+}
+
+/**
+ * Types of mapset languages.
+ */
+export enum MapsetLanguageType {
+    Any,
+    Other,
+    English,
+    Japanese,
+    Chinese,
+    Instrumental,
+    Korean,
+    French,
+    German,
+    Swedish,
+    Spanish,
+    Italian
 }
 
 /**
