@@ -19,6 +19,9 @@ export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
         if (status === "3" || status === 3) {
             return "Qualified";
         }
+        if (status === "4" || status === 4) {
+            return "Loved";
+        }
         return "Unranked";
     }
 

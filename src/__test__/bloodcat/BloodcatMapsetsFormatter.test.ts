@@ -57,14 +57,16 @@ describe("BloodcatMapsetsFormatter", () => {
         expect(formatter.parseStatus("1")).toBe("Ranked");
         expect(formatter.parseStatus("2")).toBe("Approved");
         expect(formatter.parseStatus("3")).toBe("Qualified");
+        expect(formatter.parseStatus("4")).toBe("Loved");
         expect(formatter.parseStatus("0")).toBe("Unranked");
-        expect(formatter.parseStatus("4")).toBe("Unranked");
+        expect(formatter.parseStatus("5")).toBe("Unranked");
 
         expect(formatter.parseStatus(1)).toBe("Ranked");
         expect(formatter.parseStatus(2)).toBe("Approved");
         expect(formatter.parseStatus(3)).toBe("Qualified");
+        expect(formatter.parseStatus(4)).toBe("Loved");
         expect(formatter.parseStatus(0)).toBe("Unranked");
-        expect(formatter.parseStatus(4)).toBe("Unranked");
+        expect(formatter.parseStatus(5)).toBe("Unranked");
 
         expect(formatter.parseStatus("asdf")).toBe("Unranked");
         expect(formatter.parseStatus(undefined)).toBe("Unranked");
