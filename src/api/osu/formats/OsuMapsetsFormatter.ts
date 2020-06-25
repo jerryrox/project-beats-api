@@ -1,8 +1,72 @@
 import MapsetsFormatter from '../../../utils/formats/MapsetsFormatter';
-import { IMapset, IMap } from '../../../utils/Types';
+import {
+    IMapset, IMap, GameModeType, MapsetCategoryType,
+    MapsetSortType, MapsetLanguageType, MapsetGenreType
+} from '../../../utils/Types';
 import StringUtils from '../../../utils/StringUtils';
+import Table from '../../../utils/Table';
 
 export default class OsuMapsetsFormatter extends MapsetsFormatter {
+
+    readonly modeConverter: Table;
+    readonly categoryConverter: Table;
+    readonly genreConverter: Table;
+    readonly sortConverter: Table;
+    readonly languageConverter: Table;
+
+
+    constructor() {
+        super();
+        this.modeConverter = new Table({
+            [GameModeType.OsuStandard]: GameModeType.OsuStandard,
+            [GameModeType.OsuTaiko]: GameModeType.OsuTaiko,
+            [GameModeType.OsuCatch]: GameModeType.OsuCatch,
+            [GameModeType.OsuMania]: GameModeType.OsuMania,
+        });
+        this.categoryConverter = new Table({
+            [MapsetCategoryType.Any]: "",
+            [MapsetCategoryType.Ranked]: "ranked",
+            [MapsetCategoryType.Qualified]: "qualified",
+            [MapsetCategoryType.Loved]: "loved",
+            [MapsetCategoryType.Pending]: "pending",
+            [MapsetCategoryType.Graveyard]: "graveyard",
+        });
+        this.genreConverter = new Table({
+            [MapsetGenreType.Any]: "",
+            [MapsetGenreType.Unspecified]: 1,
+            [MapsetGenreType.VideoGame]: 2,
+            [MapsetGenreType.Anime]: 3,
+            [MapsetGenreType.Rock]: 4,
+            [MapsetGenreType.Pop]: 5,
+            [MapsetGenreType.Other]: 6,
+            [MapsetGenreType.Novelty]: 7,
+            [MapsetGenreType.HipHop]: 8,
+            [MapsetGenreType.Electronic]: 10,
+        });
+        this.sortConverter = new Table({
+            [MapsetSortType.Title]: "title",
+            [MapsetSortType.Artist]: "artist",
+            [MapsetSortType.Difficulty]: "difficulty",
+            [MapsetSortType.Ranked]: "ranked",
+            [MapsetSortType.Rating]: "rating",
+            [MapsetSortType.Plays]: "plays",
+            [MapsetSortType.Favorites]: "favourites",
+        });
+        this.languageConverter = new Table({
+            [MapsetLanguageType.Any]: "",
+            [MapsetLanguageType.Other]: 1,
+            [MapsetLanguageType.English]: 2,
+            [MapsetLanguageType.Japanese]: 3,
+            [MapsetLanguageType.Chinese]: 4,
+            [MapsetLanguageType.Instrumental]: 5,
+            [MapsetLanguageType.Korean]: 6,
+            [MapsetLanguageType.French]: 7,
+            [MapsetLanguageType.German]: 8,
+            [MapsetLanguageType.Swedish]: 9,
+            [MapsetLanguageType.Spanish]: 10,
+            [MapsetLanguageType.Italian]: 11,
+        });
+    }
 
     formatMapset(data: any): IMapset {
         const maps = data.beatmaps.map((b: any) => this.formatMap(b));

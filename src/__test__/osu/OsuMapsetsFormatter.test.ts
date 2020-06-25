@@ -1,4 +1,5 @@
 import OsuMapsetsFormatter from '../../api/osu/formats/OsuMapsetsFormatter';
+import { GameModeType, MapsetCategoryType, MapsetGenreType, MapsetSortType, MapsetLanguageType } from '../../utils/Types';
 
 const testMapset = {
     "artist": "Chino (CV:Minase Inori)",
@@ -110,8 +111,9 @@ const testMap = {
 };
 
 describe("OsuMapsetsFormatter", () => {
+    const formatter = new OsuMapsetsFormatter();
+
     test("formatMap", () => {
-        const formatter = new OsuMapsetsFormatter();
         const map = formatter.formatMap(testMap);
         expect(map.id).toBe(1043170);
         expect(map.version).toBe("cappuChino!!");
@@ -129,8 +131,8 @@ describe("OsuMapsetsFormatter", () => {
         expect(map.spinnerCount).toBe(3);
         expect(map.totalCount).toBe(2187);
     });
+
     test("formatMapset", () => {
-        const formatter = new OsuMapsetsFormatter();
         const mapset = formatter.formatMapset(testMapset);
         expect(mapset.id).toBe(458983);
         expect(mapset.title).toBe("Mahou Shoujo Chino (nenpulse bootleg remix)");
@@ -168,5 +170,64 @@ describe("OsuMapsetsFormatter", () => {
         expect(map.sliderCount).toBe(585);
         expect(map.spinnerCount).toBe(3);
         expect(map.totalCount).toBe(2187);
+    });
+
+    test("modeConverter", () => {
+        const converter = formatter.modeConverter;
+        expect(converter.getValue(GameModeType.OsuStandard)).toBe(GameModeType.OsuStandard);
+        expect(converter.getValue(GameModeType.OsuTaiko)).toBe(GameModeType.OsuTaiko);
+        expect(converter.getValue(GameModeType.OsuCatch)).toBe(GameModeType.OsuCatch);
+        expect(converter.getValue(GameModeType.OsuMania)).toBe(GameModeType.OsuMania);
+    });
+
+    test("categoryConverter", () => {
+        const converter = formatter.categoryConverter;
+        expect(converter.getValue(MapsetCategoryType.Any)).toBe("");
+        expect(converter.getValue(MapsetCategoryType.Ranked)).toBe("ranked");
+        expect(converter.getValue(MapsetCategoryType.Qualified)).toBe("qualified");
+        expect(converter.getValue(MapsetCategoryType.Loved)).toBe("loved");
+        expect(converter.getValue(MapsetCategoryType.Pending)).toBe("pending");
+        expect(converter.getValue(MapsetCategoryType.Graveyard)).toBe("graveyard");
+    });
+
+    test("genreConverter", () => {
+        const converter = formatter.genreConverter;
+        expect(converter.getValue(MapsetGenreType.Any)).toBe("");
+        expect(converter.getValue(MapsetGenreType.Unspecified)).toBe(1);
+        expect(converter.getValue(MapsetGenreType.VideoGame)).toBe(2);
+        expect(converter.getValue(MapsetGenreType.Anime)).toBe(3);
+        expect(converter.getValue(MapsetGenreType.Rock)).toBe(4);
+        expect(converter.getValue(MapsetGenreType.Pop)).toBe(5);
+        expect(converter.getValue(MapsetGenreType.Other)).toBe(6);
+        expect(converter.getValue(MapsetGenreType.Novelty)).toBe(7);
+        expect(converter.getValue(MapsetGenreType.HipHop)).toBe(8);
+        expect(converter.getValue(MapsetGenreType.Electronic)).toBe(10);
+    });
+
+    test("sortConverter", () => {
+        const converter = formatter.sortConverter;
+        expect(converter.getValue(MapsetSortType.Title)).toBe("title");
+        expect(converter.getValue(MapsetSortType.Artist)).toBe("artist");
+        expect(converter.getValue(MapsetSortType.Difficulty)).toBe("difficulty");
+        expect(converter.getValue(MapsetSortType.Ranked)).toBe("ranked");
+        expect(converter.getValue(MapsetSortType.Rating)).toBe("rating");
+        expect(converter.getValue(MapsetSortType.Plays)).toBe("plays");
+        expect(converter.getValue(MapsetSortType.Favorites)).toBe("favourites");
+    });
+
+    test("languageConverter", () => {
+        const converter = formatter.languageConverter;
+        expect(converter.getValue(MapsetLanguageType.Any)).toBe("");
+        expect(converter.getValue(MapsetLanguageType.Other)).toBe(1);
+        expect(converter.getValue(MapsetLanguageType.English)).toBe(2);
+        expect(converter.getValue(MapsetLanguageType.Japanese)).toBe(3);
+        expect(converter.getValue(MapsetLanguageType.Chinese)).toBe(4);
+        expect(converter.getValue(MapsetLanguageType.Instrumental)).toBe(5);
+        expect(converter.getValue(MapsetLanguageType.Korean)).toBe(6);
+        expect(converter.getValue(MapsetLanguageType.French)).toBe(7);
+        expect(converter.getValue(MapsetLanguageType.German)).toBe(8);
+        expect(converter.getValue(MapsetLanguageType.Swedish)).toBe(9);
+        expect(converter.getValue(MapsetLanguageType.Spanish)).toBe(10);
+        expect(converter.getValue(MapsetLanguageType.Italian)).toBe(11);
     });
 });
