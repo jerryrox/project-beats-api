@@ -37,4 +37,10 @@ describe("DateUtils", () => {
         expect(DateUtils.isExpired(curDate, pastDate)).toBeFalsy();
         expect(DateUtils.isExpired(curDate, futureDate)).toBeTruthy();
     });
+
+    test("getUnixTime", () => {
+        const curDate = new Date();
+        expect(DateUtils.getUnixTime()).toBe(Math.floor(curDate.getTime() / 1000));
+        expect(DateUtils.getUnixTime(new Date(Date.UTC(1970, 0)))).toBe(0);
+    });
 });
