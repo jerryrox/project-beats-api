@@ -1,5 +1,6 @@
 import BloodcatMapsetsFormatter from '../../api/bloodcat/formats/BloodcatMapsetsFormatter';
 import DateUtils from "../../utils/DateUtils";
+import { GameModeType, MapsetCategoryType, MapsetGenreType, MapsetSortType, MapsetLanguageType } from '../../utils/Types';
 
 const testMapset = {
     "synced": "2020-06-25 08:01:28.892",
@@ -52,8 +53,9 @@ const testMap = {
 };
 
 describe("BloodcatMapsetsFormatter", () => {
+    const formatter = new BloodcatMapsetsFormatter();
+
     test("parseStatus", () => {
-        const formatter = new BloodcatMapsetsFormatter();
         expect(formatter.parseStatus("1")).toBe("Ranked");
         expect(formatter.parseStatus("2")).toBe("Approved");
         expect(formatter.parseStatus("3")).toBe("Qualified");
@@ -73,7 +75,6 @@ describe("BloodcatMapsetsFormatter", () => {
     });
 
     test("formatMap", () => {
-        const formatter = new BloodcatMapsetsFormatter();
         expect(formatter.formatMap(testMap)).toMatchObject({
             id: 1592488,
             version: "Notorious",
@@ -94,7 +95,6 @@ describe("BloodcatMapsetsFormatter", () => {
     });
 
     test("formatMapset", () => {
-        const formatter = new BloodcatMapsetsFormatter();
         expect(formatter.formatMapset(testMapset)).toMatchObject({
             id: 756528,
             title: "Notorious Thugs",
@@ -134,5 +134,64 @@ describe("BloodcatMapsetsFormatter", () => {
                 }
             ]
         });
+    });
+
+    test("modeConverter", () => {
+        const converter = formatter.modeConverter;
+        expect(converter.getValue(GameModeType.OsuStandard)).toBe(0);
+        expect(converter.getValue(GameModeType.OsuTaiko)).toBe(1);
+        expect(converter.getValue(GameModeType.OsuCatch)).toBe(2);
+        expect(converter.getValue(GameModeType.OsuMania)).toBe(3);
+    });
+
+    test("categoryConverter", () => {
+        const converter = formatter.categoryConverter;
+        expect(converter.getValue(MapsetCategoryType.Any)).toBe("");
+        expect(converter.getValue(MapsetCategoryType.Ranked)).toBe("1,2");
+        expect(converter.getValue(MapsetCategoryType.Qualified)).toBe(3);
+        expect(converter.getValue(MapsetCategoryType.Loved)).toBe(4);
+        expect(converter.getValue(MapsetCategoryType.Pending)).toBe(0);
+        expect(converter.getValue(MapsetCategoryType.Graveyard)).toBe(0);
+    });
+
+    test("genreConverter", () => {
+        const converter = formatter.genreConverter;
+        expect(converter.getValue(MapsetGenreType.Any)).toBe("");
+        expect(converter.getValue(MapsetGenreType.Unspecified)).toBe(1);
+        expect(converter.getValue(MapsetGenreType.VideoGame)).toBe(2);
+        expect(converter.getValue(MapsetGenreType.Anime)).toBe(3);
+        expect(converter.getValue(MapsetGenreType.Rock)).toBe(4);
+        expect(converter.getValue(MapsetGenreType.Pop)).toBe(5);
+        expect(converter.getValue(MapsetGenreType.Other)).toBe(6);
+        expect(converter.getValue(MapsetGenreType.Novelty)).toBe(7);
+        expect(converter.getValue(MapsetGenreType.HipHop)).toBe(8);
+        expect(converter.getValue(MapsetGenreType.Electronic)).toBe(10);
+    });
+
+    test("sortConverter", () => {
+        const converter = formatter.sortConverter;
+        expect(converter.getValue(MapsetSortType.Title)).toBeUndefined();
+        expect(converter.getValue(MapsetSortType.Artist)).toBeUndefined();
+        expect(converter.getValue(MapsetSortType.Difficulty)).toBeUndefined();
+        expect(converter.getValue(MapsetSortType.Ranked)).toBeUndefined();
+        expect(converter.getValue(MapsetSortType.Rating)).toBeUndefined();
+        expect(converter.getValue(MapsetSortType.Plays)).toBeUndefined();
+        expect(converter.getValue(MapsetSortType.Favorites)).toBeUndefined();
+    });
+
+    test("languageConverter", () => {
+        const converter = formatter.languageConverter;
+        expect(converter.getValue(MapsetLanguageType.Any)).toBe("");
+        expect(converter.getValue(MapsetLanguageType.Other)).toBe(1);
+        expect(converter.getValue(MapsetLanguageType.English)).toBe(2);
+        expect(converter.getValue(MapsetLanguageType.Japanese)).toBe(3);
+        expect(converter.getValue(MapsetLanguageType.Chinese)).toBe(4);
+        expect(converter.getValue(MapsetLanguageType.Instrumental)).toBe(5);
+        expect(converter.getValue(MapsetLanguageType.Korean)).toBe(6);
+        expect(converter.getValue(MapsetLanguageType.French)).toBe(7);
+        expect(converter.getValue(MapsetLanguageType.German)).toBe(8);
+        expect(converter.getValue(MapsetLanguageType.Swedish)).toBe(9);
+        expect(converter.getValue(MapsetLanguageType.Spanish)).toBe(10);
+        expect(converter.getValue(MapsetLanguageType.Italian)).toBe(11);
     });
 });

@@ -1,10 +1,66 @@
 import MapsetsFormatter from '../../../utils/formats/MapsetsFormatter';
-import { IMapset, IMap } from '../../../utils/Types';
+import {
+    IMapset, IMap, GameModeType, MapsetCategoryType,
+    MapsetGenreType, MapsetLanguageType
+} from '../../../utils/Types';
 import DateUtils from "../../../utils/DateUtils";
 import StringUtils from '../../../utils/StringUtils';
+import Table from '../../../utils/Table';
 
 
 export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
+
+    readonly modeConverter: Table;
+    readonly categoryConverter: Table;
+    readonly genreConverter: Table;
+    readonly sortConverter: Table;
+    readonly languageConverter: Table;
+
+
+    constructor() {
+        super();
+        this.modeConverter = new Table({
+            [GameModeType.OsuStandard]: 0,
+            [GameModeType.OsuTaiko]: 1,
+            [GameModeType.OsuCatch]: 2,
+            [GameModeType.OsuMania]: 3,
+        });
+        this.categoryConverter = new Table({
+            [MapsetCategoryType.Any]: "",
+            [MapsetCategoryType.Ranked]: "1,2",
+            [MapsetCategoryType.Qualified]: 3,
+            [MapsetCategoryType.Loved]: 4,
+            [MapsetCategoryType.Pending]: 0,
+            [MapsetCategoryType.Graveyard]: 0,
+        });
+        this.genreConverter = new Table({
+            [MapsetGenreType.Any]: "",
+            [MapsetGenreType.Unspecified]: 1,
+            [MapsetGenreType.VideoGame]: 2,
+            [MapsetGenreType.Anime]: 3,
+            [MapsetGenreType.Rock]: 4,
+            [MapsetGenreType.Pop]: 5,
+            [MapsetGenreType.Other]: 6,
+            [MapsetGenreType.Novelty]: 7,
+            [MapsetGenreType.HipHop]: 8,
+            [MapsetGenreType.Electronic]: 10,
+        });
+        this.sortConverter = new Table({});
+        this.languageConverter = new Table({
+            [MapsetLanguageType.Any]: "",
+            [MapsetLanguageType.Other]: 1,
+            [MapsetLanguageType.English]: 2,
+            [MapsetLanguageType.Japanese]: 3,
+            [MapsetLanguageType.Chinese]: 4,
+            [MapsetLanguageType.Instrumental]: 5,
+            [MapsetLanguageType.Korean]: 6,
+            [MapsetLanguageType.French]: 7,
+            [MapsetLanguageType.German]: 8,
+            [MapsetLanguageType.Swedish]: 9,
+            [MapsetLanguageType.Spanish]: 10,
+            [MapsetLanguageType.Italian]: 11,
+        });
+    }
 
     /**
      * Parses the specified status value to a displayed string format.
