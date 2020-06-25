@@ -29,9 +29,78 @@ export enum ResponseType {
 
     RequireLogin = "RequireLogin",
     RequireOAuth = "RequireOAuth",
+
+    Mapsets = "Mapsets",
+}
+
+/**
+ * Types of game providers available in game.
+ * Can be used to offset the game mode index value.
+ */
+export enum GameProviderType {
+    Osu = 0,
+    Beats = 10,
+}
+
+/**
+ * Types of game modes playable within game.
+ */
+export enum GameModeType {
+    OsuStandard = GameProviderType.Osu,
+    OsuTaiko = GameProviderType.Osu + 1,
+    OsuCatch = GameProviderType.Osu + 2,
+    OsuMania = GameProviderType.Osu + 3,
+
+    BeatsStandard = GameProviderType.Beats
 }
 
 /**
  * Type of the function for Express route handler.
  */
 export type ExpressRoute = (req: express.Request, res: express.Response) => void;
+
+/**
+ * Base structure of a mapset.
+ */
+export interface IMapset {
+    id?: number;
+    title?: string;
+    artist?: string;
+    creator?: string;
+    source?: string;
+    tags?: string;
+    coverImage?: string;
+    cardImage?: string;
+    previewAudio?: string;
+    hasVideo?: boolean;
+    hasStoryboard?: boolean;
+    bpm?: number;
+    playCount?: number;
+    favoriteCount?: number;
+    lastUpdate?: Date;
+    status?: string;
+    isDisabled?: boolean;
+    disabledInformation?: string | null;
+    maps: IMap[];
+}
+
+/**
+ * Base structure of a map.
+ */
+export interface IMap {
+    id?: number;
+    version?: string;
+    mode?: number;
+    difficulty?: number;
+    totalDuration?: number;
+    hitDuration?: number;
+    bpm?: number;
+    cs?: number;
+    drain?: number;
+    accuracy?: number;
+    ar?: number;
+    circleCount?: number;
+    sliderCount?: number;
+    spinnerCount?: number;
+    totalCount?: number;
+}
