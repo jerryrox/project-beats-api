@@ -9,7 +9,20 @@ export default class ApiRequest {
     constructor(req: express.Request | any) {
         this.req = req;
 
-        this.accessToken = req.body?.accessToken;
+        this.accessToken = this.parseAccessToken(req.headers?.authorization);
+    }
+
+    /**
+     * Parses access token from specified string.
+     */
+    parseAccessToken(value: string | undefined) {
+        if (value === undefined) {
+            return undefined;
+        }
+        if (!(/^Bearer [a-zA-Z0-9-_.]+$/.test(value))) {
+            return undefined;
+        }
+        return value.substr(7);
     }
 
     /**
