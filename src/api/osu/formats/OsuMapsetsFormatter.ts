@@ -18,10 +18,10 @@ export default class OsuMapsetsFormatter extends MapsetsFormatter {
     constructor() {
         super();
         this.modeConverter = new Table({
-            [GameModeType.OsuStandard]: GameModeType.OsuStandard,
-            [GameModeType.OsuTaiko]: GameModeType.OsuTaiko,
-            [GameModeType.OsuCatch]: GameModeType.OsuCatch,
-            [GameModeType.OsuMania]: GameModeType.OsuMania,
+            [GameModeType.OsuStandard]: 0,
+            [GameModeType.OsuTaiko]: 1,
+            [GameModeType.OsuCatch]: 2,
+            [GameModeType.OsuMania]: 3,
         });
         this.categoryConverter = new Table({
             [MapsetCategoryType.Any]: "",

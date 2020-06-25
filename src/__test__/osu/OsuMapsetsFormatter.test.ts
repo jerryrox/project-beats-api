@@ -174,10 +174,10 @@ describe("OsuMapsetsFormatter", () => {
 
     test("modeConverter", () => {
         const converter = formatter.modeConverter;
-        expect(converter.getValue(GameModeType.OsuStandard)).toBe(GameModeType.OsuStandard);
-        expect(converter.getValue(GameModeType.OsuTaiko)).toBe(GameModeType.OsuTaiko);
-        expect(converter.getValue(GameModeType.OsuCatch)).toBe(GameModeType.OsuCatch);
-        expect(converter.getValue(GameModeType.OsuMania)).toBe(GameModeType.OsuMania);
+        expect(converter.getValue(GameModeType.OsuStandard)).toBe(0);
+        expect(converter.getValue(GameModeType.OsuTaiko)).toBe(1);
+        expect(converter.getValue(GameModeType.OsuCatch)).toBe(2);
+        expect(converter.getValue(GameModeType.OsuMania)).toBe(3);
     });
 
     test("categoryConverter", () => {
