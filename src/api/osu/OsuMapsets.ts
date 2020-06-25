@@ -34,7 +34,7 @@ export async function mapsets(req: express.Request, res: express.Response) {
     }
 }
 
-export async function mapsetDownload(req: express.Request, res:express.Response) {
+export async function mapsetDownload(req: express.Request, res: express.Response) {
     const request = new ApiRequest(req);
     request.assertAccessToken();
 }
