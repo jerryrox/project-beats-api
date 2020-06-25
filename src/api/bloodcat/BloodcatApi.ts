@@ -4,6 +4,9 @@ const BloodcatApi: IApi = {
     baseUrl: "http://bloodcat.com/osu",
 
     auth: unsupportedRequest,
-    authResponse: unsupportedRequest
+    authResponse: unsupportedRequest,
+
+    mapsets: unsupportedRequest,
+    mapsetDownload: unsupportedRequest,
 };
 export default BloodcatApi;
