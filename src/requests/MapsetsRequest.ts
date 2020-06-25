@@ -1,19 +1,21 @@
 import express from 'express';
 
 import ApiRequest from './ApiRequest';
+import StringUtils from '../utils/StringUtils';
 
 export default class MapsetsRequest extends ApiRequest {
 
     cursorId: string | undefined;
     cursorValue: string | undefined;
-    mode: string | undefined;
-    category: string | undefined;
-    genre: string | undefined;
-    language: string | undefined;
+    mode: number | undefined;
+    category: number | undefined;
+    genre: number | undefined;
+    language: number | undefined;
+    sort: number | undefined;
     query: string | undefined;
-    sort: string | undefined;
     hasVideo: boolean;
     hasStoryboard: boolean;
+    isDescending: boolean;
 
 
     constructor(req: express.Request | any) {
@@ -21,14 +23,15 @@ export default class MapsetsRequest extends ApiRequest {
 
         this.cursorId = req.query?.cursorId;
         this.cursorValue = this.findCursorValue(req.query);
-        this.mode = req.query?.mode;
-        this.category = req.query?.category;
-        this.genre = req.query?.genre;
-        this.language = req.query?.language;
+        this.mode = StringUtils.tryParseNumber(req.query?.mode);
+        this.category = StringUtils.tryParseNumber(req.query?.category);
+        this.genre = StringUtils.tryParseNumber(req.query?.genre);
+        this.language = StringUtils.tryParseNumber(req.query?.language);
+        this.sort = StringUtils.tryParseNumber(req.query?.sort);
         this.query = req.query?.query;
-        this.sort = req.query?.sort;
         this.hasVideo = req.query?.hasVideo === "true" || req.query?.hasVideo === true;
         this.hasStoryboard = req.query?.hasStoryboard === "true";
+        this.isDescending = req.query?.isDescending !== "false";
     }
 
     /**

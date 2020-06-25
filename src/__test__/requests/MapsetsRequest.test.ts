@@ -1,4 +1,5 @@
 import MapsetsRequest from '../../requests/MapsetsRequest';
+import { MapsetGenreType, MapsetLanguageType, MapsetSortType } from '../../utils/Types';
 
 describe("MapsetsRequest", () => {
     test("findCursorValue", () => {
@@ -33,22 +34,24 @@ describe("MapsetsRequest", () => {
                 "cursor[asdf]": "cv",
                 mode: "m",
                 category: "c",
-                genre: "g",
-                language: "l",
+                genre: MapsetGenreType.Electronic,
+                language: MapsetLanguageType.Instrumental,
+                sort: MapsetSortType.Difficulty,
                 query: "q",
-                sort: "s",
-                hasVideo: "true"
+                hasVideo: "true",
+                isDescending: "a"
             }
         });
         expect(request.cursorId).toBe("cid");
         expect(request.cursorValue).toBe("cv");
-        expect(request.mode).toBe("m");
-        expect(request.category).toBe("c");
-        expect(request.genre).toBe("g");
-        expect(request.language).toBe("l");
+        expect(request.mode).toBe(0);
+        expect(request.category).toBe(0);
+        expect(request.genre).toBe(MapsetGenreType.Electronic);
+        expect(request.language).toBe(MapsetLanguageType.Instrumental);
         expect(request.query).toBe("q");
-        expect(request.sort).toBe("s");
+        expect(request.sort).toBe(MapsetSortType.Difficulty);
         expect(request.hasVideo).toBe(true);
         expect(request.hasStoryboard).toBe(false);
+        expect(request.isDescending).toBe(true);
     });
 });
