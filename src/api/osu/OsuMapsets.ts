@@ -1,18 +1,21 @@
 import express from 'express';
 import axios from 'axios';
 
-import ApiRequest from '../../requests/ApiRequest';
 import ErrorResponse from '../../responses/ErrorResponse';
 import MapsetsResponse from '../../responses/MapsetsResponse';
 import OsuMapsetsFormatter from './formats/OsuMapsetsFormatter';
 import MapsetsRequest from '../../requests/MapsetsRequest';
 import OsuUtils from './OsuUtils';
+import MapsetDownloadRequest from '../../requests/MapsetDownloadRequest';
+import {
+    mapsetDownload as bloodcatMapsetDownload
+} from "../bloodcat/BloodcatMapsets";
 
 export async function mapsets(req: express.Request, res: express.Response) {
-    const request = new MapsetsRequest(req);
-    request.assertAccessToken();
-
     try {
+        const request = new MapsetsRequest(req);
+        request.assertAccessToken();
+        
         const formatter = new OsuMapsetsFormatter();
 
         const response = await axios.get(
@@ -37,8 +40,13 @@ export async function mapsets(req: express.Request, res: express.Response) {
 }
 
 export async function mapsetDownload(req: express.Request, res: express.Response) {
-    const request = new ApiRequest(req);
-    request.assertAccessToken();
+    try {
+        const request = new MapsetDownloadRequest(req);
+        request.assertAccessToken();
 
-    res.send(new ErrorResponse(new Error("TODO")));
+        await bloodcatMapsetDownload(req, res);
+    }
+    catch (e) {
+        res.json(new ErrorResponse(e));
+    }
 }
