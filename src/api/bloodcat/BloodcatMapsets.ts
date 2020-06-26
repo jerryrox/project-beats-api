@@ -8,9 +8,8 @@ import MapsetsRequest from '../../requests/MapsetsRequest';
 import StringUtils from '../../utils/StringUtils';
 
 export async function mapsets(req: express.Request, res: express.Response) {
-    const request = new MapsetsRequest(req);
-
     try {
+        const request = new MapsetsRequest(req);
         const formatter = new BloodcatMapsetsFormatter();
 
         const response = await axios.get(

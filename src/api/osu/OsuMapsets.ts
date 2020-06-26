@@ -9,10 +9,10 @@ import MapsetsRequest from '../../requests/MapsetsRequest';
 import OsuUtils from './OsuUtils';
 
 export async function mapsets(req: express.Request, res: express.Response) {
-    const request = new MapsetsRequest(req);
-    request.assertAccessToken();
-
     try {
+        const request = new MapsetsRequest(req);
+        request.assertAccessToken();
+        
         const formatter = new OsuMapsetsFormatter();
 
         const response = await axios.get(
