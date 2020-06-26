@@ -1,4 +1,8 @@
 import IApi, { unsupportedRequest } from '../IApi';
+import {
+    mapsets,
+    mapsetDownload
+} from "./BloodcatMapsets";
 
 const BloodcatApi: IApi = {
     baseUrl: "http://bloodcat.com/osu",
@@ -6,7 +10,7 @@ const BloodcatApi: IApi = {
     auth: unsupportedRequest,
     authResponse: unsupportedRequest,
 
-    mapsets: unsupportedRequest,
-    mapsetDownload: unsupportedRequest,
+    mapsets,
+    mapsetDownload,
 };
 export default BloodcatApi;
