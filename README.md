@@ -10,6 +10,9 @@ An API server for Project: Beats.
 
 ## Versions
 ### 0.2.0 (WIP)
+#### New features
+- Implemented mapset searching routes for osu! and Bloodcat.
+- Established a common interface for translating data between pb-api and different API providers.
 #### Changes
 - Message for UnsupportedResponse.
 - Removed oauthState variable in AuthRequest.
