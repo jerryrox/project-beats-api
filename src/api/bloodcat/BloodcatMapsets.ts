@@ -42,7 +42,7 @@ export async function mapsetDownload(req: express.Request, res: express.Response
         const response = await axios.get(`${BloodcatApi.baseUrl}/s/${request.mapsetId}`, {
             responseType: "stream"
         });
-        Object.keys(response.headers).forEach(k => {
+        Object.keys(response.headers).forEach((k) => {
             res.setHeader(k, response.headers[k]);
         });
         response.data.pipe(res);
