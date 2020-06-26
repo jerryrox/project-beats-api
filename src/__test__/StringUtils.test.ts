@@ -13,5 +13,7 @@ describe("StringUtils", () => {
         expect(StringUtils.tryParseNumber("5.123")).toBe(5.123);
         expect(StringUtils.tryParseNumber(".36")).toBe(0.36);
         expect(StringUtils.tryParseNumber("1", 2)).toBe(1);
+
+        expect(StringUtils.tryParseNumber(5, 1)).toBe(5);
     });
 });
