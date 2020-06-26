@@ -1,7 +1,6 @@
 import express from 'express';
 import axios from 'axios';
 
-import ApiRequest from '../../requests/ApiRequest';
 import ErrorResponse from '../../responses/ErrorResponse';
 import MapsetsResponse from '../../responses/MapsetsResponse';
 import OsuMapsetsFormatter from './formats/OsuMapsetsFormatter';
