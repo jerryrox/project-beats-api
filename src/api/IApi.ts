@@ -19,5 +19,8 @@ interface IApi {
 
     auth: ExpressRoute;
     authResponse: ExpressRoute;
+
+    mapsets: ExpressRoute;
+    mapsetDownload: ExpressRoute;
 }
 export default IApi;

@@ -9,6 +9,16 @@ const DateUtils = {
     },
 
     /**
+     * Returns the Unix time for current or specified date.
+     */
+    getUnixTime(date?: Date) {
+        if (date === undefined) {
+            return Math.floor(new Date().getTime() / 1000);
+        }
+        return Math.floor(date.getTime() / 1000);
+    },
+
+    /**
      * Returns whether the specified target date is expired based on current date.
      */
     isExpired(targetDate: Date | number, curDate?: Date | number) {

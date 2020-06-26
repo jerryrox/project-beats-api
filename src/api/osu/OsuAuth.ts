@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from "axios";
 
-import { ApiProvider } from '../../utils/Types';
+import { ApiProviderType } from '../../utils/Types';
 import Environment from '../../utils/Environment';
 import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
 import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
@@ -13,10 +13,10 @@ function getAuthRedirectUrl(): string {
 }
 
 export function auth(req: express.Request, res: express.Response): void {
-    const clientId = Environment.getClientId(ApiProvider.Osu);
+    const clientId = Environment.getClientId(ApiProviderType.Osu);
     const redirectUrl = encodeURIComponent(getAuthRedirectUrl());
     res.json(new RequireOAuthResponse(
-        `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=identify&state=`
+        `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=public&state=`
     ));
 }
 
@@ -28,8 +28,8 @@ export async function authResponse(req: express.Request, res: express.Response) 
     }
 
     // const state = req.query.state as string;
-    const clientId = Environment.getClientId(ApiProvider.Osu);
-    const secret = Environment.getSecret(ApiProvider.Osu);
+    const clientId = Environment.getClientId(ApiProviderType.Osu);
+    const secret = Environment.getSecret(ApiProviderType.Osu);
     try {
         const response = await axios.post(
             "https://osu.ppy.sh/oauth/token",

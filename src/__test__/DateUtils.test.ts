@@ -3,7 +3,9 @@ import DateUtils from '../utils/DateUtils';
 describe("DateUtils", () => {
     test("getTimeAfter", () => {
         const curDate = new Date();
-        expect(DateUtils.getTimeAfter(1)).toBe(curDate.setSeconds(curDate.getSeconds() + 1));
+        const timeAfterSecond = DateUtils.getTimeAfter(1);
+        // Be generous to give at most 1 second off.
+        expect(timeAfterSecond).toBeLessThanOrEqual(curDate.setSeconds(curDate.getSeconds() + 2));
 
         const customDate = new Date("1997-03-27");
         expect(DateUtils.getTimeAfter(2, customDate)).toBe(customDate.setSeconds(customDate.getSeconds() + 2));
@@ -36,5 +38,11 @@ describe("DateUtils", () => {
 
         expect(DateUtils.isExpired(curDate, pastDate)).toBeFalsy();
         expect(DateUtils.isExpired(curDate, futureDate)).toBeTruthy();
+    });
+
+    test("getUnixTime", () => {
+        const curDate = new Date();
+        expect(DateUtils.getUnixTime()).toBeLessThanOrEqual(Math.floor(curDate.getTime() / 1000) + 1);
+        expect(DateUtils.getUnixTime(new Date(Date.UTC(1970, 0)))).toBe(0);
     });
 });

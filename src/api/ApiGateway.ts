@@ -1,11 +1,11 @@
-import { ApiProvider } from '../utils/Types';
+import { ApiProviderType } from '../utils/Types';
 import OsuApi from './osu/OsuApi';
 import IApi from './IApi';
 import BloodcatApi from './bloodcat/BloodcatApi';
 
 export const apis: any = {
-    [ApiProvider.Osu]: OsuApi,
-    [ApiProvider.Bloodcat]: BloodcatApi,
+    [ApiProviderType.Osu]: OsuApi,
+    [ApiProviderType.Bloodcat]: BloodcatApi,
 };
 
 const ApiGateway = {
