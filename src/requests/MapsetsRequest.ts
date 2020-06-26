@@ -30,7 +30,7 @@ export default class MapsetsRequest extends ApiRequest {
         this.cursorKey = req.query?.cursorKey;
         this.cursorValue = req.query ? req.query[`cursor[${this.cursorKey}]`] : undefined;
         this.mode = StringUtils.tryParseNumber(req.query?.mode, GameModeType.OsuStandard);
-        this.category = StringUtils.tryParseNumber(req.query?.category, MapsetCategoryType.Any);
+        this.category = StringUtils.tryParseNumber(req.query?.category, MapsetCategoryType.Ranked);
         this.genre = StringUtils.tryParseNumber(req.query?.genre, MapsetGenreType.Any);
         this.language = StringUtils.tryParseNumber(req.query?.language, MapsetLanguageType.Any);
         this.sort = StringUtils.tryParseNumber(req.query?.sort, MapsetSortType.Ranked);

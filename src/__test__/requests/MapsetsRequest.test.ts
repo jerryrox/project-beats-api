@@ -1,5 +1,5 @@
 import MapsetsRequest from '../../requests/MapsetsRequest';
-import { MapsetGenreType, MapsetLanguageType, MapsetSortType } from '../../utils/Types';
+import { MapsetGenreType, MapsetLanguageType, MapsetSortType, MapsetCategoryType } from '../../utils/Types';
 
 describe("MapsetsRequest", () => {
     test("Request state", () => {
@@ -22,7 +22,7 @@ describe("MapsetsRequest", () => {
         expect(request.cursorKey).toBe("asdf");
         expect(request.cursorValue).toBe("cv");
         expect(request.mode).toBe(0);
-        expect(request.category).toBe(0);
+        expect(request.category).toBe(MapsetCategoryType.Ranked);
         expect(request.genre).toBe(MapsetGenreType.Electronic);
         expect(request.language).toBe(MapsetLanguageType.Instrumental);
         expect(request.query).toBe("q");
