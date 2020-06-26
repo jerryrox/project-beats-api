@@ -1,5 +1,4 @@
 import IApi from '../IApi';
-import ApiRequest from '../../requests/ApiRequest';
 import {
     auth,
     authResponse
@@ -9,20 +8,9 @@ import {
     mapsetDownload
 } from "./OsuMapsets";
 
-interface IOsuApi extends IApi {
-    getHeaderWithAuth(request: ApiRequest, content?: any): any
-}
-
-const OsuApi: IOsuApi = {
+const OsuApi: IApi = {
     
     baseUrl: "https://osu.ppy.sh/api/v2",
-
-    getHeaderWithAuth(request: ApiRequest, content?: any) {
-        return {
-            ...content,
-            Authorization: `Bearer ${request.accessToken}`
-        };
-    },
 
     auth,
     authResponse,

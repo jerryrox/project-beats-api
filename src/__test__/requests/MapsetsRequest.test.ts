@@ -13,7 +13,7 @@ describe("MapsetsRequest", () => {
                 genre: MapsetGenreType.Electronic,
                 language: MapsetLanguageType.Instrumental,
                 sort: MapsetSortType.Difficulty,
-                query: "q",
+                query: " q ",
                 hasVideo: "true",
                 isDescending: "a"
             }

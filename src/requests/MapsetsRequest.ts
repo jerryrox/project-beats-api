@@ -2,7 +2,10 @@ import express from 'express';
 
 import ApiRequest from './ApiRequest';
 import StringUtils from '../utils/StringUtils';
-import { GameModeType, MapsetCategoryType, MapsetGenreType, MapsetLanguageType, MapsetSortType } from '../utils/Types';
+import {
+    GameModeType, MapsetCategoryType, MapsetGenreType, MapsetLanguageType,
+    MapsetSortType
+} from '../utils/Types';
 
 export default class MapsetsRequest extends ApiRequest {
 
@@ -33,7 +36,11 @@ export default class MapsetsRequest extends ApiRequest {
         this.sort = StringUtils.tryParseNumber(req.query?.sort, MapsetSortType.Ranked);
         this.query = req.query?.query;
         this.hasVideo = req.query?.hasVideo === "true" || req.query?.hasVideo === true;
-        this.hasStoryboard = req.query?.hasStoryboard === "true";
-        this.isDescending = req.query?.isDescending !== "false";
+        this.hasStoryboard = req.query?.hasStoryboard === "true" || req.query?.hasStoryboard === true;
+        this.isDescending = req.query?.isDescending !== "false" && req.query?.isDescending !== false;
+
+        if (typeof (this.query) === "string") {
+            this.query = this.query.trim();
+        }
     }
 }
