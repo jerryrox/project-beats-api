@@ -11,6 +11,8 @@ An API server for Project: Beats.
 ## Versions
 ### 0.3.0 (WIP)
 #### New features
+#### Changes
+- If there is a try/catch block in an endpoint handler, make all codes go inside the try block.
 
 ### 0.2.0
 #### New features
