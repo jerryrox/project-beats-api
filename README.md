@@ -9,7 +9,7 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
-### 0.3.0 (WIP)
+### 0.3.0
 #### New features
 - Implemented mapset download for Bloodcat.
 - Implemented mapset download for osu!.
