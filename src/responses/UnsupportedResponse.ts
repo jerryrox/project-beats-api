@@ -9,7 +9,7 @@ export default class UnsupportedResponse extends ApiResponse {
     constructor() {
         super({
             type: ResponseType.Unsupported,
-            message: "This route is unsupported for the selected provider."
+            message: "This request is unsupported for the selected provider."
         });
     }
 }

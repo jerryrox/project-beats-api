@@ -10,4 +10,11 @@ routes.get("/:provider/auth/response", (req, res) => {
     ApiGateway.getApi(req.params.provider).authResponse(req, res);
 });
 
+routes.get("/:provider/mapsets", (req, res) => {
+    ApiGateway.getApi(req.params.provider).mapsets(req, res);
+});
+routes.get("/:provider/mapsets/:id/download", (req, res) => {
+    ApiGateway.getApi(req.params.provider).mapsetDownload(req, res);
+});
+
 export default routes;

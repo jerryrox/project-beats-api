@@ -1,18 +1,18 @@
 import {
     config
 } from "dotenv";
-import { NodeEnv, ApiProvider } from './Types';
+import { NodeEnvType, ApiProviderType } from './Types';
 
 config();
 
 interface IEnvironmentInfoParam {
-    envType: NodeEnv | string,
+    envType: NodeEnvType | string,
     env?: NodeJS.ProcessEnv
 }
 
 export class EnvironmentInfo {
 
-    envType: NodeEnv | string;
+    envType: NodeEnvType | string;
     env: NodeJS.ProcessEnv;
 
 
@@ -29,7 +29,7 @@ export class EnvironmentInfo {
     /**
      * Returns the base string of key which has provider and environment type variant.
      */
-    getBaseKey(provider?: ApiProvider | string): string {
+    getBaseKey(provider?: ApiProviderType | string): string {
         if (provider === undefined) {
             return `${this.envType}`.toUpperCase();
         }
@@ -59,7 +59,7 @@ export class EnvironmentInfo {
     /**
      * Returns the secret key for the specified API provider.
      */
-    getSecret(provider: ApiProvider | string): string {
+    getSecret(provider: ApiProviderType | string): string {
         const key = `${this.getBaseKey(provider)}_SECRET`;
         return this.getEnvValue(key);
     }
@@ -67,14 +67,14 @@ export class EnvironmentInfo {
     /**
      * Returns the client id for the specified API provider.
      */
-    getClientId(provider: ApiProvider | string): string {
+    getClientId(provider: ApiProviderType | string): string {
         const key = `${this.getBaseKey(provider)}_CLIENT_ID`;
         return this.getEnvValue(key);
     }
 }
 
 const Environment = new EnvironmentInfo({
-    envType: (process.env.NODE_ENV || "development") as NodeEnv,
+    envType: (process.env.NODE_ENV || "development") as NodeEnvType,
     env: process.env
 });
 export default Environment;

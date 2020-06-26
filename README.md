@@ -9,6 +9,14 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### 0.2.0
+#### New features
+- Implemented mapset searching routes for osu! and Bloodcat.
+- Established a common interface for translating data between pb-api and different API providers.
+#### Changes
+- Message for UnsupportedResponse.
+- Removed oauthState variable in AuthRequest.
+
 ### 0.1.0
 #### New features
 - Defined standard API request format.
