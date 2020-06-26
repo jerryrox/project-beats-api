@@ -11,6 +11,8 @@ An API server for Project: Beats.
 ## Versions
 ### 0.3.0 (WIP)
 #### New features
+- Implemented mapset download for Bloodcat.
+- Implemented mapset download for osu!.
 #### Changes
 - If there is a try/catch block in an endpoint handler, make all codes go inside the try block.
 
