@@ -16,7 +16,7 @@ export async function mapsets(req: express.Request, res: express.Response) {
         const formatter = new OsuMapsetsFormatter();
 
         const response = await axios.get(
-            OsuUtils.getMapsetSearchUrl(request),
+            formatter.getMapsetSearchUrl(request),
             {
                 headers: OsuUtils.getHeaderWithAuth(request)
             }
