@@ -1,5 +1,7 @@
 import OsuMapsetsFormatter from '../../api/osu/formats/OsuMapsetsFormatter';
 import { GameModeType, MapsetCategoryType, MapsetGenreType, MapsetSortType, MapsetLanguageType } from '../../utils/Types';
+import MapsetsRequest from '../../requests/MapsetsRequest';
+import OsuApi from "../../api/osu/OsuApi";
 
 const testMapset = {
     "artist": "Chino (CV:Minase Inori)",
@@ -229,5 +231,57 @@ describe("OsuMapsetsFormatter", () => {
         expect(converter.getValue(MapsetLanguageType.Swedish)).toBe(9);
         expect(converter.getValue(MapsetLanguageType.Spanish)).toBe(10);
         expect(converter.getValue(MapsetLanguageType.Italian)).toBe(11);
+    });
+
+    test("getMapsetSearchUrl", () => {
+        let request = new MapsetsRequest({
+            query: {
+                cursorId: "cid",
+                cursorKey: "difficulty",
+                "cursor[difficulty]": "5.5",
+                mode: GameModeType.OsuStandard,
+                language: MapsetLanguageType.Any,
+                query: " chino",
+                hasVideo: "true",
+                hasStoryboard: true
+            }
+        });
+        expect(
+            formatter.getMapsetSearchUrl(request)
+        ).toBe(
+            `${OsuApi.baseUrl}/beatmapsets/search?cursor%5B_id%5D=cid&cursor%5Bdifficulty%5D=5.5&s=ranked&q=chino&e=storyboard.video`
+        );
+
+        request = new MapsetsRequest({
+            query: {
+                sort: MapsetSortType.Ranked,
+                isDescending: true
+            }
+        });
+        expect(formatter.getMapsetSearchUrl(request)).toBe(`${OsuApi.baseUrl}/beatmapsets/search?s=ranked`);
+
+        request = new MapsetsRequest({
+            query: {
+                sort: MapsetSortType.Ranked,
+                isDescending: false
+            }
+        });
+        expect(formatter.getMapsetSearchUrl(request)).toBe(`${OsuApi.baseUrl}/beatmapsets/search?s=ranked&sort=ranked_asc`);
+
+        request = new MapsetsRequest({
+            query: {
+                sort: MapsetSortType.Title,
+                isDescending: true
+            }
+        });
+        expect(formatter.getMapsetSearchUrl(request)).toBe(`${OsuApi.baseUrl}/beatmapsets/search?s=ranked&sort=title_desc`);
+
+        request = new MapsetsRequest({
+            query: {
+                sort: MapsetSortType.Title,
+                isDescending: false
+            }
+        });
+        expect(formatter.getMapsetSearchUrl(request)).toBe(`${OsuApi.baseUrl}/beatmapsets/search?s=ranked&sort=title_asc`);
     });
 });

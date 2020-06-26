@@ -3,9 +3,10 @@ import {
     IMapset, IMap, GameModeType, MapsetCategoryType,
     MapsetGenreType, MapsetLanguageType
 } from '../../../utils/Types';
-import DateUtils from "../../../utils/DateUtils";
 import StringUtils from '../../../utils/StringUtils';
 import Table from '../../../utils/Table';
+import BloodcatApi from "../BloodcatApi";
+import MapsetsRequest from '../../../requests/MapsetsRequest';
 
 
 export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
@@ -81,11 +82,19 @@ export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
         return "Unranked";
     }
 
+    getMapsetSearchUrl(request: MapsetsRequest) {
+        const status = this.categoryConverter.getValue(request.category);
+        const mode = this.modeConverter.getValue(request.mode);
+        const genre = this.genreConverter.getValue(request.genre);
+        const language = this.languageConverter.getValue(request.language);
+        const page = StringUtils.tryParseNumber(request.cursorValue, 1);
+        const query = request.query;
+        return `${BloodcatApi.baseUrl}?mod=json&c=b&s=${status}&m=${mode}&g=${genre}&l=${language}&p=${page}&q=${query}`;
+    }
+
     formatMapset(data: any): IMapset {
         const maps = data.beatmaps.map((b: any) => this.formatMap(b));
-
         const hasValidId = typeof (data.id) === "string" && data.id.length > 0;
-
         return {
             id: StringUtils.tryParseNumber(data.id),
             title: data.title,

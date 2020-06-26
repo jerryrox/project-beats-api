@@ -1,12 +1,15 @@
-import MapsetsFormatter from '../../../utils/formats/MapsetsFormatter';
 import {
     IMapset, IMap, GameModeType, MapsetCategoryType,
     MapsetSortType, MapsetLanguageType, MapsetGenreType
 } from '../../../utils/Types';
 import StringUtils from '../../../utils/StringUtils';
 import Table from '../../../utils/Table';
+import MapsetsRequest from '../../../requests/MapsetsRequest';
+import OsuApi from "../OsuApi";
+import WebUtils from '../../../utils/WebUtils';
+import MapsetsFormatter from '../../../utils/formats/MapsetsFormatter';
 
-export default class OsuMapsetsFormatter extends MapsetsFormatter {
+export default class OsuMapsetFormatter extends MapsetsFormatter {
 
     readonly modeConverter: Table;
     readonly categoryConverter: Table;
@@ -68,9 +71,48 @@ export default class OsuMapsetsFormatter extends MapsetsFormatter {
         });
     }
 
+    getMapsetSearchUrl(request: MapsetsRequest) {
+        let url = `${OsuApi.baseUrl}/beatmapsets/search`;
+        if (request.cursorId !== undefined) {
+            url = WebUtils.addQueryParam(url, "cursor[_id]", request.cursorId);
+        }
+        if (request.cursorKey !== undefined && request.cursorValue !== undefined) {
+            url = WebUtils.addQueryParam(url, `cursor[${request.cursorKey}]`, request.cursorValue);
+        }
+        if (request.mode !== undefined && request.mode !== GameModeType.OsuStandard) {
+            url = WebUtils.addQueryParam(url, "m", this.modeConverter.getValue(request.mode));
+        }
+        if (request.category !== undefined && request.category !== MapsetCategoryType.Any) {
+            url = WebUtils.addQueryParam(url, "s", this.categoryConverter.getValue(request.category));
+        }
+        if (request.genre !== undefined && request.genre !== MapsetGenreType.Any) {
+            url = WebUtils.addQueryParam(url, "g", this.genreConverter.getValue(request.genre));
+        }
+        if (request.language !== undefined && request.language !== MapsetLanguageType.Any) {
+            url = WebUtils.addQueryParam(url, "l", this.languageConverter.getValue(request.language));
+        }
+        if (request.query !== undefined && request.query.length > 0) {
+            url = WebUtils.addQueryParam(url, "q", request.query);
+        }
+        if (request.sort !== undefined) {
+            if (request.sort !== MapsetSortType.Ranked || !request.isDescending) {
+                url = WebUtils.addQueryParam(url, "sort", `${this.sortConverter.getValue(request.sort)}_${request.isDescending ? "desc" : "asc"}`);
+            }
+        }
+        if (request.hasVideo === true && request.hasStoryboard === true) {
+            url = WebUtils.addQueryParam(url, "e", "storyboard.video");
+        }
+        else if (request.hasVideo === true) {
+            url = WebUtils.addQueryParam(url, "e", "video");
+        }
+        else if (request.hasStoryboard === true) {
+            url = WebUtils.addQueryParam(url, "e", "storyboard");
+        }
+        return url;
+    }
+
     formatMapset(data: any): IMapset {
         const maps = data.beatmaps.map((b: any) => this.formatMap(b));
-
         return {
             id: data.id,
             title: data.title,

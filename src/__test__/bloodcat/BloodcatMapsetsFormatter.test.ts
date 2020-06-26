@@ -1,6 +1,8 @@
 import BloodcatMapsetsFormatter from '../../api/bloodcat/formats/BloodcatMapsetsFormatter';
 import DateUtils from "../../utils/DateUtils";
 import { GameModeType, MapsetCategoryType, MapsetGenreType, MapsetSortType, MapsetLanguageType } from '../../utils/Types';
+import MapsetsRequest from '../../requests/MapsetsRequest';
+import BloodcatApi from "../../api/bloodcat/BloodcatApi";
 
 const testMapset = {
     "synced": "2020-06-25 08:01:28.892",
@@ -193,5 +195,25 @@ describe("BloodcatMapsetsFormatter", () => {
         expect(converter.getValue(MapsetLanguageType.Swedish)).toBe(9);
         expect(converter.getValue(MapsetLanguageType.Spanish)).toBe(10);
         expect(converter.getValue(MapsetLanguageType.Italian)).toBe(11);
+    });
+
+    test("getMapsetSearchUrl", () => {
+        let request = new MapsetsRequest({
+            query: {
+                cursorId: "cid",
+                cursorKey: "page",
+                "cursor[page]": "2",
+                mode: GameModeType.OsuStandard,
+                language: MapsetLanguageType.Any,
+                query: " chino",
+                hasVideo: "true",
+                hasStoryboard: true
+            }
+        });
+        expect(
+            formatter.getMapsetSearchUrl(request)
+        ).toBe(
+            `${BloodcatApi.baseUrl}?mod=json&c=b&s=1,2&m=0&g=&l=&p=2&q=chino`
+        );
     });
 });
