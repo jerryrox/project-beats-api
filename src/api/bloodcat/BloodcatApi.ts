@@ -5,7 +5,7 @@ import {
 } from "./BloodcatMapsets";
 
 const BloodcatApi: IApi = {
-    baseUrl: "http://bloodcat.com/osu",
+    baseUrl: "https://bloodcat.com/osu",
 
     auth: unsupportedRequest,
     authResponse: unsupportedRequest,

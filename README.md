@@ -9,6 +9,11 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### 0.3.0 (WIP)
+#### New features
+#### Changes
+- If there is a try/catch block in an endpoint handler, make all codes go inside the try block.
+
 ### 0.2.0
 #### New features
 - Implemented mapset searching routes for osu! and Bloodcat.
