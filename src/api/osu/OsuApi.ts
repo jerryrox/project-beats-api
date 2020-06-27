@@ -4,6 +4,9 @@ import {
     authResponse
 } from "./OsuAuth";
 import {
+    me
+} from "./OsuMe";
+import {
     mapsets,
     mapsetDownload
 } from "./OsuMapsets";
@@ -14,6 +17,8 @@ const OsuApi: IApi = {
 
     auth,
     authResponse,
+
+    me,
 
     mapsets,
     mapsetDownload,
