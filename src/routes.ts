@@ -10,6 +10,10 @@ routes.get("/:provider/auth/response", (req, res) => {
     ApiGateway.getApi(req.params.provider).authResponse(req, res);
 });
 
+routes.get("/:provider/me", (req, res) => {
+    ApiGateway.getApi(req.params.provider).me(req, res);
+});
+
 routes.get("/:provider/mapsets", (req, res) => {
     ApiGateway.getApi(req.params.provider).mapsets(req, res);
 });

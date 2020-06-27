@@ -10,6 +10,8 @@ const BloodcatApi: IApi = {
     auth: unsupportedRequest,
     authResponse: unsupportedRequest,
 
+    me: unsupportedRequest,
+
     mapsets,
     mapsetDownload,
 };

@@ -31,6 +31,8 @@ export enum ResponseType {
     RequireLogin = "RequireLogin",
     RequireOAuth = "RequireOAuth",
 
+    Me = "Me",
+
     Mapsets = "Mapsets",
 }
 
