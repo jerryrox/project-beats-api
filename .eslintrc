@@ -37,6 +37,7 @@
         "prefer-destructuring": "off",
         "object-shorthand": "off",
         "no-undef": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off"
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "import/prefer-default-export": "off"
     }
 }
