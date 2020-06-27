@@ -9,7 +9,7 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
-### 0.4.0 (WIP)
+### 0.4.0
 - Implemented "me" route for retrieving online information.
 - Implemented Deeplink feature to send back OAuth response to the game.
 
