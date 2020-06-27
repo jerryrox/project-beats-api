@@ -7,6 +7,7 @@ import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
 import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
 import ErrorResponse from '../../responses/ErrorResponse';
 import SuccessResponse from '../../responses/SuccessResponse';
+import DeepLinker from '../../utils/DeepLinker';
 
 function getAuthRedirectUrl(): string {
     return Environment.getAppUrl(`/api/osu/auth/response`);
@@ -48,7 +49,7 @@ export async function authResponse(req: express.Request, res: express.Response) 
             }
         );
 
-        res.json(new OAuthSuccessResponse({
+        DeepLinker.link(res, new OAuthSuccessResponse({
             accessToken: response.data.access_token,
             expiresIn: response.data.expires_in,
             refreshToken: response.data.refresh_token
