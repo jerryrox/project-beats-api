@@ -17,10 +17,27 @@ interface IApi {
 
     baseUrl: string;
 
+    /**
+     * Route which handles user login.
+     */
     auth: ExpressRoute;
+    /**
+     * Special route for some API providers to redirect to if using OAuth.
+     */
     authResponse: ExpressRoute;
 
+    /**
+     * Route which returns the information of the user for the specific provider.
+     */
+    me: ExpressRoute;
+
+    /**
+     * Route which is used for searching mapsets.
+     */
     mapsets: ExpressRoute;
+    /**
+     * Route which is used for downloading a specified mapset.
+     */
     mapsetDownload: ExpressRoute;
 }
 export default IApi;
