@@ -29,7 +29,7 @@ routes.get("/:provider/me", (req, res) => {
 routes.get("/:provider/mapsets", (req, res) => {
     ApiGateway.getApi(req.params.provider).mapsets(req, res);
 });
-routes.get("/:provider/mapsets/:id/download", (req, res) => {
+routes.get("/:provider/mapsets/download", (req, res) => {
     ApiGateway.getApi(req.params.provider).mapsetDownload(req, res);
 });
 

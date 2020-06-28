@@ -3,7 +3,7 @@ import MapsetDownloadRequest from '../../requests/MapsetDownloadRequest';
 describe("MapsetDownloadRequest", () => {
     test("Request state", () => {
         let request = new MapsetDownloadRequest({
-            params: {
+            query: {
                 id: "123456"
             }
         });
