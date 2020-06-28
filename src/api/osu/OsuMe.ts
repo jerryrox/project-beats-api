@@ -1,7 +1,7 @@
 import express from 'express';
 import axios from 'axios';
 
-import ErrorResponse from '../../responses/ErrorResponse';
+import ErrorResponse from '../../responses/failures/ErrorResponse';
 import ApiRequest from '../../requests/ApiRequest';
 import OsuApi from "./OsuApi";
 import MeResponse from '../../responses/MeResponse';

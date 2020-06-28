@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { ExpressRoute } from '../utils/Types';
-import UnsupportedResponse from '../responses/UnsupportedResponse';
+import UnsupportedResponse from '../responses/failures/UnsupportedResponse';
 
 /**
  * A function for handling unsupported request.

@@ -1,4 +1,4 @@
-import ErrorResponse from '../../responses/ErrorResponse';
+import ErrorResponse from '../../responses/failures/ErrorResponse';
 import { ResponseType } from '../../utils/Types';
 
 describe("ErrorResponse", () => {

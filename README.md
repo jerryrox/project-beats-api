@@ -9,6 +9,16 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### 0.5.0 (WIP)
+#### New features
+- Added some routes for testing from the client side.
+- Added provider value in AuthResponse data to give a context of the provider when using OAuth.
+#### Changes
+- Removed RequireLoginResponse.
+- Removed refreshToken and expiresIn values in AuthResponse data.
+- Changed UnsupportedResponse to a type of ErrorResponse.
+- Renaming of some responses.
+
 ### 0.4.0
 - Implemented "me" route for retrieving online information.
 - Implemented Deeplink feature to send back OAuth response to the game.

@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 
-import ErrorResponse from './responses/ErrorResponse';
+import ErrorResponse from './responses/failures/ErrorResponse';
 import routes from './routes';
 
 const app = express();
