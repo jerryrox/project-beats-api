@@ -7,6 +7,7 @@ import StringUtils from '../../../utils/StringUtils';
 import Table from '../../../utils/Table';
 import BloodcatApi from "../BloodcatApi";
 import MapsetsRequest from '../../../requests/MapsetsRequest';
+import WebUtils from '../../../utils/WebUtils';
 
 
 export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
@@ -85,15 +86,29 @@ export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
     }
 
     getMapsetSearchUrl(request: MapsetsRequest) {
-        const pageCursor = request.cursors[BloodcatMapsetsFormatter.CursorPageKey];
-        const page = StringUtils.tryParseNumber(pageCursor, 1);
+        let url = WebUtils.addQueryParam(BloodcatApi.baseUrl, "mod", "json");
+        url = WebUtils.addQueryParam(url, "c", "b");
 
         const status = this.categoryConverter.getValue(request.category);
+        url = WebUtils.addQueryParam(url, "s", status);
+
         const mode = this.modeConverter.getValue(request.mode);
+        url = WebUtils.addQueryParam(url, "m", mode);
+
         const genre = this.genreConverter.getValue(request.genre);
+        url = WebUtils.addQueryParam(url, "g", genre);
+
         const language = this.languageConverter.getValue(request.language);
+        url = WebUtils.addQueryParam(url, "l", language);
+
+        const pageCursor = request.cursors[BloodcatMapsetsFormatter.CursorPageKey];
+        const page = StringUtils.tryParseNumber(pageCursor, 1);
+        url = WebUtils.addQueryParam(url, "p", page);
+
         const query = request.query;
-        return `${BloodcatApi.baseUrl}?mod=json&c=b&s=${status}&m=${mode}&g=${genre}&l=${language}&p=${page}&q=${query}`;
+        url = WebUtils.addQueryParam(url, "q", query);
+        
+        return url;
     }
 
     formatMapset(data: any): IMapset {
