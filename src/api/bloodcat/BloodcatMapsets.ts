@@ -14,6 +14,8 @@ export async function mapsets(req: express.Request, res: express.Response) {
         const request = new MapsetsRequest(req);
         const formatter = new BloodcatMapsetsFormatter();
 
+        console.log(`Bloodcat request url: ${formatter.getMapsetSearchUrl(request)}`);
+
         const response = await axios.get(
             formatter.getMapsetSearchUrl(request)
         );
