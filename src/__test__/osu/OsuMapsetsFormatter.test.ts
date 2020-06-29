@@ -236,8 +236,7 @@ describe("OsuMapsetsFormatter", () => {
     test("getMapsetSearchUrl", () => {
         let request = new MapsetsRequest({
             query: {
-                cursorId: "cid",
-                cursorKey: "difficulty",
+                "cursor[_id]": "cid",
                 "cursor[difficulty]": "5.5",
                 mode: GameModeType.OsuStandard,
                 language: MapsetLanguageType.Any,

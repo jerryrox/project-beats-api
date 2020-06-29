@@ -11,6 +11,8 @@ import MapsetsRequest from '../../../requests/MapsetsRequest';
 
 export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
 
+    static CursorPageKey = "cursor[page]";
+
     readonly modeConverter: Table;
     readonly categoryConverter: Table;
     readonly genreConverter: Table;
@@ -83,11 +85,13 @@ export default class BloodcatMapsetsFormatter extends MapsetsFormatter {
     }
 
     getMapsetSearchUrl(request: MapsetsRequest) {
+        const pageCursor = request.cursors[BloodcatMapsetsFormatter.CursorPageKey];
+        const page = StringUtils.tryParseNumber(pageCursor, 1);
+
         const status = this.categoryConverter.getValue(request.category);
         const mode = this.modeConverter.getValue(request.mode);
         const genre = this.genreConverter.getValue(request.genre);
         const language = this.languageConverter.getValue(request.language);
-        const page = StringUtils.tryParseNumber(request.cursorValue, 1);
         const query = request.query;
         return `${BloodcatApi.baseUrl}?mod=json&c=b&s=${status}&m=${mode}&g=${genre}&l=${language}&p=${page}&q=${query}`;
     }

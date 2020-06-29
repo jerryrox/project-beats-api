@@ -9,9 +9,7 @@ import {
 
 export default class MapsetsRequest extends ApiRequest {
 
-    cursorId: string | undefined;
-    cursorKey: string | undefined;
-    cursorValue: string | undefined;
+    cursors: any;
     mode: number | undefined;
     category: number | undefined;
     genre: number | undefined;
@@ -26,9 +24,7 @@ export default class MapsetsRequest extends ApiRequest {
     constructor(req: express.Request | any) {
         super(req);
 
-        this.cursorId = req.query?.cursorId;
-        this.cursorKey = req.query?.cursorKey;
-        this.cursorValue = req.query ? req.query[`cursor[${this.cursorKey}]`] : undefined;
+        this.cursors = this.parseCursors(req.query);
         this.mode = StringUtils.tryParseNumber(req.query?.mode, GameModeType.OsuStandard);
         this.category = StringUtils.tryParseNumber(req.query?.category, MapsetCategoryType.Ranked);
         this.genre = StringUtils.tryParseNumber(req.query?.genre, MapsetGenreType.Any);
@@ -42,5 +38,22 @@ export default class MapsetsRequest extends ApiRequest {
         if (typeof (this.query) === "string") {
             this.query = this.query.trim();
         }
+    }
+
+    /**
+     * Parses cursor key value pairs and returns an object representing it.
+     */
+    parseCursors(query: any | undefined): any {
+        if (query === undefined) {
+            return {};
+        }
+        
+        const cursors: any = {};
+        Object.keys(query).forEach((k: string) => {
+            if (k.startsWith("cursor")) {
+                cursors[k] = query[k];
+            }
+        });
+        return cursors;
     }
 }

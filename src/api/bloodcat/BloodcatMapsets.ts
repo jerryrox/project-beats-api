@@ -17,11 +17,12 @@ export async function mapsets(req: express.Request, res: express.Response) {
         const response = await axios.get(
             formatter.getMapsetSearchUrl(request)
         );
-
+        
+        const cursorPageKey = BloodcatMapsetsFormatter.CursorPageKey;
         const parsedMapsets: any[] = response.data.map((m: any) => formatter.formatMapset(m));
-        const newPage = StringUtils.tryParseNumber(request.cursorValue, 1) + 1;
+        const newPage = StringUtils.tryParseNumber(request.cursors[cursorPageKey], 1) + 1;
         const cursor = parsedMapsets.length === 0 ? null : {
-            "cursor[page]": newPage
+            [cursorPageKey]: newPage
         };
 
         res.json(new MapsetsResponse({
