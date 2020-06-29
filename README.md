@@ -17,7 +17,11 @@ An API server for Project: Beats.
 - Removed RequireLoginResponse.
 - Removed refreshToken and expiresIn values in AuthResponse data.
 - Changed UnsupportedResponse to a type of ErrorResponse.
+- Changed the way cursor values are received by the MapsetsRequest.
+- Made MapsetsRequest receive mapset id as a query parameter instead.
 - Renaming of some responses.
+#### Fixes
+- Fixed Bloodcat's mapset search query params not being escaped correctly.
 
 ### 0.4.0
 - Implemented "me" route for retrieving online information.
