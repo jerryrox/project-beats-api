@@ -21,6 +21,7 @@ An API server for Project: Beats.
 - Made MapsetsRequest receive mapset id as a query parameter instead.
 - Renaming of some responses.
 #### Fixes
+- Fixed cursor query param not being parsed correctly.
 - Fixed Bloodcat's mapset search query params not being escaped correctly.
 
 ### 0.4.0
