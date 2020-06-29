@@ -5,8 +5,10 @@ describe("MapsetsRequest", () => {
     test("Request state", () => {
         const request = new MapsetsRequest({
             query: {
-                "cursor[_id]": "cid",
-                "cursor[asdf]": "cv",
+                cursor: {
+                    _id: "cid",
+                    asdf: "cv"
+                },
                 mode: "m",
                 category: "c",
                 genre: MapsetGenreType.Electronic,

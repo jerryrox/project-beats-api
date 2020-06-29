@@ -236,8 +236,10 @@ describe("OsuMapsetsFormatter", () => {
     test("getMapsetSearchUrl", () => {
         let request = new MapsetsRequest({
             query: {
-                "cursor[_id]": "cid",
-                "cursor[difficulty]": "5.5",
+                cursor: {
+                    _id: "cid",
+                    difficulty: "5.5"
+                },
                 mode: GameModeType.OsuStandard,
                 language: MapsetLanguageType.Any,
                 query: " chino",

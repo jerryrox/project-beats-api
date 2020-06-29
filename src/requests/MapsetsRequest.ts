@@ -47,12 +47,15 @@ export default class MapsetsRequest extends ApiRequest {
         if (query === undefined) {
             return {};
         }
+
+        const queryCursor = query.cursor;
+        if (queryCursor === null || queryCursor === undefined) {
+            return {};
+        }
         
         const cursors: any = {};
-        Object.keys(query).forEach((k: string) => {
-            if (k.startsWith("cursor")) {
-                cursors[k] = query[k];
-            }
+        Object.keys(queryCursor).forEach((k: string) => {
+            cursors[`cursor[${k}]`] = queryCursor[k];
         });
         return cursors;
     }
