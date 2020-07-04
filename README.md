@@ -9,7 +9,7 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
-### 0.5.0 (WIP)
+### 0.5.0
 #### New features
 - Added some routes for testing from the client side.
 - Added provider value in AuthResponse data to give a context of the provider when using OAuth.
