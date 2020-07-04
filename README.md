@@ -9,6 +9,8 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### 0.6.0 (WIP)
+
 ### 0.5.0
 #### New features
 - Added some routes for testing from the client side.
