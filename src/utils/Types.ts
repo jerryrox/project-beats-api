@@ -13,8 +13,8 @@ export enum NodeEnvType {
  * Types of API providers currently supported by Project: Beats.
  */
 export enum ApiProviderType {
-    Osu = "osu",
-    Bloodcat = "bloodcat"
+    Osu = "Osu",
+    Bloodcat = "Bloodcat"
 }
 
 /**
