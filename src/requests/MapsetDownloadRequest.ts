@@ -13,7 +13,7 @@ export default class MapsetDownloadRequest extends ApiRequest {
     constructor(req: express.Request | any) {
         super(req);
 
-        this.mapsetId = req.params?.id;
+        this.mapsetId = req.query?.id;
     }
 
     /**

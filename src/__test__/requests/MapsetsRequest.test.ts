@@ -5,9 +5,10 @@ describe("MapsetsRequest", () => {
     test("Request state", () => {
         const request = new MapsetsRequest({
             query: {
-                cursorId: "cid",
-                cursorKey: "asdf",
-                "cursor[asdf]": "cv",
+                cursor: {
+                    _id: "cid",
+                    asdf: "cv"
+                },
                 mode: "m",
                 category: "c",
                 genre: MapsetGenreType.Electronic,
@@ -18,9 +19,10 @@ describe("MapsetsRequest", () => {
                 isDescending: "a"
             }
         });
-        expect(request.cursorId).toBe("cid");
-        expect(request.cursorKey).toBe("asdf");
-        expect(request.cursorValue).toBe("cv");
+        expect(request.cursors).toMatchObject({
+            "cursor[_id]": "cid",
+            "cursor[asdf]": "cv"
+        });
         expect(request.mode).toBe(0);
         expect(request.category).toBe(MapsetCategoryType.Ranked);
         expect(request.genre).toBe(MapsetGenreType.Electronic);

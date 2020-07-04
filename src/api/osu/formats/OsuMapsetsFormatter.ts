@@ -73,12 +73,10 @@ export default class OsuMapsetFormatter extends MapsetsFormatter {
 
     getMapsetSearchUrl(request: MapsetsRequest) {
         let url = `${OsuApi.baseUrl}/beatmapsets/search`;
-        if (request.cursorId !== undefined) {
-            url = WebUtils.addQueryParam(url, "cursor[_id]", request.cursorId);
-        }
-        if (request.cursorKey !== undefined && request.cursorValue !== undefined) {
-            url = WebUtils.addQueryParam(url, `cursor[${request.cursorKey}]`, request.cursorValue);
-        }
+
+        Object.keys(request.cursors).forEach((k: any) => {
+            url = WebUtils.addQueryParam(url, k, request.cursors[k]);
+        });
         if (request.mode !== undefined && request.mode !== GameModeType.OsuStandard) {
             url = WebUtils.addQueryParam(url, "m", this.modeConverter.getValue(request.mode));
         }

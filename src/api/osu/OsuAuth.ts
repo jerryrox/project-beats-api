@@ -3,20 +3,20 @@ import axios from "axios";
 
 import { ApiProviderType } from '../../utils/Types';
 import Environment from '../../utils/Environment';
-import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
-import OAuthSuccessResponse from '../../responses/OAuthSuccessResponse';
-import ErrorResponse from '../../responses/ErrorResponse';
+import OAuthResponse from '../../responses/OAuthResponse';
+import AuthResponse from '../../responses/AuthResponse';
+import ErrorResponse from '../../responses/failures/ErrorResponse';
 import SuccessResponse from '../../responses/SuccessResponse';
 import DeepLinker from '../../utils/DeepLinker';
 
 function getAuthRedirectUrl(): string {
-    return Environment.getAppUrl(`/api/osu/auth/response`);
+    return Environment.getAppUrl(`/api/Osu/auth/response`);
 }
 
 export function auth(req: express.Request, res: express.Response): void {
     const clientId = Environment.getClientId(ApiProviderType.Osu);
     const redirectUrl = encodeURIComponent(getAuthRedirectUrl());
-    res.json(new RequireOAuthResponse(
+    res.json(new OAuthResponse(
         `https://osu.ppy.sh/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&scope=public&state=`
     ));
 }
@@ -49,10 +49,9 @@ export async function authResponse(req: express.Request, res: express.Response) 
             }
         );
 
-        DeepLinker.link(res, new OAuthSuccessResponse({
-            accessToken: response.data.access_token,
-            expiresIn: response.data.expires_in,
-            refreshToken: response.data.refresh_token
+        DeepLinker.link(res, new AuthResponse({
+            provider: ApiProviderType.Osu,
+            accessToken: response.data.access_token
         }));
     }
     catch (e) {

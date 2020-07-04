@@ -1,5 +1,5 @@
-import ApiResponse from './ApiResponse';
-import { ResponseType } from "../utils/Types";
+import ApiResponse from '../ApiResponse';
+import { ResponseType } from "../../utils/Types";
 
 /**
  * An interval server error response.

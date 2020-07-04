@@ -13,8 +13,8 @@ export enum NodeEnvType {
  * Types of API providers currently supported by Project: Beats.
  */
 export enum ApiProviderType {
-    Osu = "osu",
-    Bloodcat = "bloodcat"
+    Osu = "Osu",
+    Bloodcat = "Bloodcat"
 }
 
 /**
@@ -22,17 +22,12 @@ export enum ApiProviderType {
  */
 export enum ResponseType {
     Success = "Success",
-    OAuthSuccess = "OAuthSuccess",
-
-    Unsupported = "Unsupported",
+    Auth = "Auth",
 
     Error = "Error",
 
-    RequireLogin = "RequireLogin",
-    RequireOAuth = "RequireOAuth",
-
+    OAuth = "OAuth",
     Me = "Me",
-
     Mapsets = "Mapsets",
 }
 

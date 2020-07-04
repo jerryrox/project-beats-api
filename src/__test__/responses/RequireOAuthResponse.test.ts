@@ -1,10 +1,10 @@
-import RequireOAuthResponse from '../../responses/RequireOAuthResponse';
+import OAuthResponse from '../../responses/OAuthResponse';
 import { ResponseType } from '../../utils/Types';
 
-describe("RequireOAuthResponse", () => {
+describe("OAuthResponse", () => {
     test("Response state", () => {
-        const response = new RequireOAuthResponse("myUrl");
-        expect(response.type).toBe(ResponseType.RequireOAuth);
+        const response = new OAuthResponse("myUrl");
+        expect(response.type).toBe(ResponseType.OAuth);
         expect(response.data).toMatchObject({
             oauthUrl: "myUrl"
         });

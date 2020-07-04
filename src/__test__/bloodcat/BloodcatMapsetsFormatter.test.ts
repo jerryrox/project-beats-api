@@ -200,9 +200,9 @@ describe("BloodcatMapsetsFormatter", () => {
     test("getMapsetSearchUrl", () => {
         let request = new MapsetsRequest({
             query: {
-                cursorId: "cid",
-                cursorKey: "page",
-                "cursor[page]": "2",
+                cursor: {
+                    page: "2"
+                },
                 mode: GameModeType.OsuStandard,
                 language: MapsetLanguageType.Any,
                 query: " chino",
@@ -213,7 +213,21 @@ describe("BloodcatMapsetsFormatter", () => {
         expect(
             formatter.getMapsetSearchUrl(request)
         ).toBe(
-            `${BloodcatApi.baseUrl}?mod=json&c=b&s=1,2&m=0&g=&l=&p=2&q=chino`
+            `${BloodcatApi.baseUrl}?mod=json&c=b&s=1%2C2&m=0&g=&l=&p=2&q=chino`
+        );
+
+        request = new MapsetsRequest({
+            query: {
+                cursor: {
+                    page: 3
+                },
+                query: "dragon ball",
+            }
+        });
+        expect(
+            formatter.getMapsetSearchUrl(request)
+        ).toBe(
+            `${BloodcatApi.baseUrl}?mod=json&c=b&s=1%2C2&m=0&g=&l=&p=3&q=dragon%20ball`
         );
     });
 });
