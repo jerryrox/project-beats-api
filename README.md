@@ -12,6 +12,8 @@ An API server for Project: Beats.
 ### 0.6.0 (WIP)
 #### New features
 - Created a method in MapsetsFormatter for standardizing cursor response.
+#### Fixes
+- Fixed osu! API not returning a valid format for mapset search cursor.
 
 ### 0.5.0
 #### New features
