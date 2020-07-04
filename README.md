@@ -20,6 +20,7 @@ An API server for Project: Beats.
 - Changed the way cursor values are received by the MapsetsRequest.
 - Made MapsetsRequest receive mapset id as a query parameter instead.
 - Renaming of some responses.
+- Capitalized ApiProviderType values due to JSON parsing issue in the client side.
 #### Fixes
 - Fixed cursor query param not being parsed correctly.
 - Fixed Bloodcat's mapset search query params not being escaped correctly.
