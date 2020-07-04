@@ -10,7 +10,7 @@ import SuccessResponse from '../../responses/SuccessResponse';
 import DeepLinker from '../../utils/DeepLinker';
 
 function getAuthRedirectUrl(): string {
-    return Environment.getAppUrl(`/api/osu/auth/response`);
+    return Environment.getAppUrl(`/api/Osu/auth/response`);
 }
 
 export function auth(req: express.Request, res: express.Response): void {
