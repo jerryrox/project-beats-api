@@ -285,4 +285,16 @@ describe("OsuMapsetsFormatter", () => {
         });
         expect(formatter.getMapsetSearchUrl(request)).toBe(`${OsuApi.baseUrl}/beatmapsets/search?s=ranked&sort=title_asc`);
     });
+
+    test("formatCursorResponse", () => {
+        expect(formatter.formatCursorResponse({
+            _id: "234",
+            page: 123
+        })).toMatchObject({
+            "cursor[_id]": "234",
+            "cursor[page]": "123"
+        });
+
+        expect(formatter.formatCursorResponse(null)).toMatchObject({});
+    });
 });

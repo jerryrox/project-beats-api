@@ -10,6 +10,8 @@ An API server for Project: Beats.
 
 ## Versions
 ### 0.6.0 (WIP)
+#### New features
+- Created a method in MapsetsFormatter for standardizing cursor response.
 
 ### 0.5.0
 #### New features
