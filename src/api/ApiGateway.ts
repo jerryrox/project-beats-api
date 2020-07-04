@@ -2,6 +2,7 @@ import { ApiProviderType } from '../utils/Types';
 import OsuApi from './osu/OsuApi';
 import IApi from './IApi';
 import BloodcatApi from './bloodcat/BloodcatApi';
+import StringUtils from '../utils/StringUtils';
 
 export const apis: any = {
     [ApiProviderType.Osu]: OsuApi,
@@ -10,9 +11,11 @@ export const apis: any = {
 
 const ApiGateway = {
     getApi(provider: string): IApi {
-        const api = apis[provider] as IApi;
+        // Ensure the provider is always capitalized.
+        const capitalizedProvider = StringUtils.capitalize(provider);
+        const api = apis[capitalizedProvider] as IApi;
         if (api === undefined) {
-            throw new Error(`API not found for specifield provider: ${provider}`);
+            throw new Error(`API not found for specifield provider: ${capitalizedProvider}`);
         }
         return api;
     }
