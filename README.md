@@ -9,6 +9,8 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### (WIP)
+
 ### 0.6.0
 #### New features
 - Created a method in MapsetsFormatter for standardizing cursor response.
