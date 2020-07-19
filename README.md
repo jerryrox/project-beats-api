@@ -9,6 +9,14 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### 0.6.0
+#### New features
+- Created a method in MapsetsFormatter for standardizing cursor response.
+#### Improvements
+- Increased timeout for mapset download route to 6 minutes.
+#### Fixes
+- Fixed osu! API not returning a valid format for mapset search cursor.
+
 ### 0.5.0
 #### New features
 - Added some routes for testing from the client side.

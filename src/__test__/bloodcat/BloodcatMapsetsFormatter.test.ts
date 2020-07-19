@@ -230,4 +230,18 @@ describe("BloodcatMapsetsFormatter", () => {
             `${BloodcatApi.baseUrl}?mod=json&c=b&s=1%2C2&m=0&g=&l=&p=3&q=dragon%20ball`
         );
     });
+
+    test("formatCursorResponse", () => {
+        expect(formatter.formatCursorResponse({
+            _id: "234",
+            page: 123,
+            "cursor[123]": "a"
+        })).toMatchObject({
+            "cursor[_id]": "234",
+            "cursor[page]": "123",
+            "cursor[123]": "a"
+        });
+
+        expect(formatter.formatCursorResponse(null)).toMatchObject({});
+    });
 });

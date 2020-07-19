@@ -27,10 +27,12 @@ export async function mapsets(req: express.Request, res: express.Response) {
         if (response.data.error !== null) {
             throw new Error(response.data.error);
         }
+
+        const cursor = formatter.formatCursorResponse(response.data.cursor);
         
         res.json(new MapsetsResponse({
             mapsets: response.data.beatmapsets.map((m: any) => formatter.formatMapset(m)),
-            cursor: response.data.cursor,
+            cursor,
             total: response.data.total
         }));
     }

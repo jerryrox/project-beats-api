@@ -30,6 +30,7 @@ routes.get("/:provider/mapsets", (req, res) => {
     ApiGateway.getApi(req.params.provider).mapsets(req, res);
 });
 routes.get("/:provider/mapsets/download", (req, res) => {
+    req.setTimeout(360000);
     ApiGateway.getApi(req.params.provider).mapsetDownload(req, res);
 });
 

@@ -40,6 +40,26 @@ export default abstract class MapsetsFormatter {
     abstract getMapsetSearchUrl(request: MapsetsRequest): string;
 
     /**
+     * Formats the specified cursor suitable for mapset search response.
+     */
+    formatCursorResponse(rawCursor: any): any {
+        if (rawCursor === null || rawCursor === undefined) {
+            return {};
+        }
+
+        const cursor: any = {};
+        Object.keys(rawCursor).forEach((k) => {
+            if (k.startsWith("cursor[")) {
+                cursor[k] = String(rawCursor[k]);
+            }
+            else {
+                cursor[`cursor[${k}]`] = String(rawCursor[k]);
+            }
+        });
+        return cursor;
+    }
+
+    /**
      * Formats the specified data into a mapset.
      */
     abstract formatMapset(data: any): IMapset;

@@ -21,9 +21,9 @@ export async function mapsets(req: express.Request, res: express.Response) {
         const cursorPageKey = BloodcatMapsetsFormatter.CursorPageKey;
         const parsedMapsets: any[] = response.data.map((m: any) => formatter.formatMapset(m));
         const newPage = StringUtils.tryParseNumber(request.cursors[cursorPageKey], 1) + 1;
-        const cursor = {
+        const cursor = formatter.formatCursorResponse({
             [cursorPageKey]: newPage
-        };
+        });
 
         res.json(new MapsetsResponse({
             mapsets: parsedMapsets,
