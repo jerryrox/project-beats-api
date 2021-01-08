@@ -10,6 +10,7 @@ import MapsetDownloadRequest from '../../requests/MapsetDownloadRequest';
 import {
     mapsetDownload as bloodcatMapsetDownload
 } from "../bloodcat/BloodcatMapsets";
+import OsuApi from "./OsuApi";
 
 export async function mapsets(req: express.Request, res: express.Response) {
     try {
@@ -44,9 +45,18 @@ export async function mapsets(req: express.Request, res: express.Response) {
 export async function mapsetDownload(req: express.Request, res: express.Response) {
     try {
         const request = new MapsetDownloadRequest(req);
+        request.assertMapsetId();
         request.assertAccessToken();
 
-        await bloodcatMapsetDownload(req, res);
+        const response = await axios.get(
+            `https://chimu.moe/d/${request.mapsetId}/`, {
+                responseType: "stream"
+            }
+        );
+        Object.keys(response.headers).forEach((k) => {
+            res.setHeader(k, response.headers[k]);
+        });
+        response.data.pipe(res);
     }
     catch (e) {
         res.json(new ErrorResponse(e));
