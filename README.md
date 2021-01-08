@@ -9,7 +9,9 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
-### (WIP)
+### 0.6.1 (WIP)
+#### Fixes
+- Fixed osu! provider's download as Bloodcat seems permanently down.
 
 ### 0.6.0
 #### New features

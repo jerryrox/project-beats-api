@@ -7,7 +7,6 @@ import BloodcatMapsetsFormatter from './formats/BloodcatMapsetsFormatter';
 import MapsetsRequest from '../../requests/MapsetsRequest';
 import StringUtils from '../../utils/StringUtils';
 import MapsetDownloadRequest from '../../requests/MapsetDownloadRequest';
-import BloodcatApi from "./BloodcatApi";
 
 export async function mapsets(req: express.Request, res: express.Response) {
     try {

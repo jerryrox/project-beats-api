@@ -7,10 +7,6 @@ import OsuMapsetsFormatter from './formats/OsuMapsetsFormatter';
 import MapsetsRequest from '../../requests/MapsetsRequest';
 import OsuUtils from './OsuUtils';
 import MapsetDownloadRequest from '../../requests/MapsetDownloadRequest';
-import {
-    mapsetDownload as bloodcatMapsetDownload
-} from "../bloodcat/BloodcatMapsets";
-import OsuApi from "./OsuApi";
 
 export async function mapsets(req: express.Request, res: express.Response) {
     try {
