@@ -7,7 +7,6 @@ import BloodcatMapsetsFormatter from './formats/BloodcatMapsetsFormatter';
 import MapsetsRequest from '../../requests/MapsetsRequest';
 import StringUtils from '../../utils/StringUtils';
 import MapsetDownloadRequest from '../../requests/MapsetDownloadRequest';
-import BloodcatApi from "./BloodcatApi";
 
 export async function mapsets(req: express.Request, res: express.Response) {
     try {
@@ -40,9 +39,15 @@ export async function mapsetDownload(req: express.Request, res: express.Response
         const request = new MapsetDownloadRequest(req);
         request.assertMapsetId();
 
-        const response = await axios.get(`${BloodcatApi.baseUrl}/s/${request.mapsetId}`, {
-            responseType: "stream"
-        });
+        // Bloodcat is down! :(
+        // const response = await axios.get(`${BloodcatApi.baseUrl}/s/${request.mapsetId}`, {
+        //     responseType: "stream"
+        // });
+        const response = await axios.get(
+            `https://chimu.moe/d/${request.mapsetId}/`, {
+                responseType: "stream"
+            }
+        );
         Object.keys(response.headers).forEach((k) => {
             res.setHeader(k, response.headers[k]);
         });
