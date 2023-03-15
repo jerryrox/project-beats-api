@@ -1,8 +1,0 @@
-__test__
-
-# Below are copied over from gitignore file
-
-node_modules
-build
-.env
-ts-out

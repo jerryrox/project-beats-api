@@ -9,6 +9,10 @@ An API server for Project: Beats.
 [https://trello.com/b/r5F7x62K/project-beats-api]
 
 ## Versions
+### 0.7.0
+#### Changes
+- Moved server hosting to Firebase with Heroku no longer supporting free tier hosting.
+
 ### 0.6.1
 #### Fixes
 - Fixed osu! provider's download as Bloodcat seems permanently down.

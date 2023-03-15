@@ -1,0 +1,27 @@
+import ApiRequest from './ApiRequest';
+import * as functions from "firebase-functions";
+
+/**
+ * A request which represents mapset download.
+ */
+export default class MapsetDownloadRequest extends ApiRequest {
+
+    mapsetId: string | undefined;
+
+
+    constructor(req: functions.Request | any) {
+        super(req);
+
+        this.mapsetId = req.query?.id;
+    }
+
+    /**
+     * Asserts mapsetId's existence.
+     * Throws an error if undefined or empty string.
+     */
+    assertMapsetId() {
+        if (this.mapsetId === undefined || this.mapsetId.length <= 0) {
+            throw new Error("Parameter 'id' must be valid.");
+        }
+    }
+}
